@@ -8,6 +8,8 @@
              <li><router-link to="/dashboard" exact>Dashboard</router-link></li>
              <li><router-link to="/add" exact>Add Item</router-link></li>
              <li><router-link to="/list" exact>List</router-link></li>
+             <li><router-link to="/visuals" exact>Analytics</router-link></li>
+
           </ul>
         </nav>
   </div>

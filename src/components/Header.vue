@@ -3,7 +3,9 @@
         <nav>
           <h1>{{ title }}</h1>
           <ul>
-             <li><router-link to="/" exact>Home</router-link></li>
+            <li><router-link to="/home1" exact>Home1</router-link></li>
+            <li><router-link to="/home2" exact>Home2</router-link></li>
+             <li><router-link to="/dashboard" exact>Dashboard</router-link></li>
              <li><router-link to="/add" exact>Add Item</router-link></li>
              <li><router-link to="/list" exact>List</router-link></li>
              <li><router-link to="/visuals" exact>Analytics</router-link></li>

@@ -4,6 +4,7 @@ import Home1 from './components/Home1.vue'
 import Home2 from './components/Home2.vue'
 import Dashboard from './components/Dashboard.vue'
 import Analytics from './components/Analytics.vue'
+import AboutUs from './components/AboutUs.vue'
 
 
 export default[
@@ -12,5 +13,6 @@ export default[
     { path: '/dashboard', component: Dashboard},
     { path: '/add', component: AddItem},
     { path: '/list', component: PageContent}, 
-    { path: '/visuals', component: Analytics}
+    { path: '/visuals', component: Analytics},
+    { path: '/AboutUs', component: AboutUs}
 ]

@@ -17,24 +17,24 @@ export default {
   name: "App",
   data() {
     return {
-      itemsListInput: [
-        { name: "Eggs", image: "./assets/eggs.jpg", show: false },
-        { name: "Bread", image: "/assets/bread.jfif", show: false },
-        { name: "Jam", image: "/assets/jam.jfif", show: false },
-        { name: "CornFlakes", image: "/assets/cornflakes.jfif", show: false },
-        { name: "Milk", image: "/assets/milk.jfif", show: false },
-        { name: "Juice", image: "/assets/juice.jfif", show: false }
-      ],
+      // itemsListInput: [
+      //   { name: "Eggs", image: "./assets/eggs.jpg", show: false },
+      //   { name: "Bread", image: "/assets/bread.jfif", show: false },
+      //   { name: "Jam", image: "/assets/jam.jfif", show: false },
+      //   { name: "CornFlakes", image: "/assets/cornflakes.jfif", show: false },
+      //   { name: "Milk", image: "/assets/milk.jfif", show: false },
+      //   { name: "Juice", image: "/assets/juice.jfif", show: false }
+      // ],
 
-      itemsListSecond: [
-        { name: "Oranges", image: "./assets/orange.jpg", show: false },
-        {
-          name: "Peanut Butter",
-          image: "/assets/peanutbutter.jpeg",
-          show: false
-        },
-        { name: "Strawberries", image: "/assets/strawberries.jpg", show: false }
-      ],
+      // itemsListSecond: [
+      //   { name: "Oranges", image: "./assets/orange.jpg", show: false },
+      //   {
+      //     name: "Peanut Butter",
+      //     image: "/assets/peanutbutter.jpeg",
+      //     show: false
+      //   },
+      //   { name: "Strawberries", image: "/assets/strawberries.jpg", show: false }
+      // ],
       msg: "GroupFinder"
     };
   },

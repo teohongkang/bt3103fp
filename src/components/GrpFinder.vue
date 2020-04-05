@@ -19,7 +19,7 @@
   <br />
   <br />Filter by Region:
   <br />
-  <select id="filterByRegion" name="filterByRegion">
+  <select id="filterByRegion" name="filterByRegion" @change="onChange(event)">
     <option value="allRegions">All Regions</option>
     <option value="north">North</option>
     <option value="south">South</option>
@@ -31,7 +31,7 @@
   <br />
   <br />Filter by Venue:
   <br />
-  <select id="filterByVenue" name="filterByVenue">
+  <select id="filterByVenue" name="filterByVenue" @change="onChohange(event)">
     <option value="allVenues">All Venues</option>
     <option value="cafe">Cafe</option>
     <option value="library">Library</option>
@@ -84,14 +84,36 @@ export default {
       course:"",
       email:"",
       number:"",
+      count:1,
+ 
     };
   },
   methods: {
 joinGroup:function(item){
-  //UPDATE AND ADD DATA TO DATABASE, NOT REPLACE CURRENT DATA
-  database.collection('groups').doc(item.id).set({Nextname:this.name}, { merge: true });
+ // UPDATE AND ADD DATA TO DATABASE, NOT REPLACE CURRENT DATA
+  //  database.collection('groups').doc(item.id).set({Nextname:this.name}, { merge: true });
+  //  alert("you have successfully been added!")
+ 
+  database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count)
+  .set({name:this.name}, { merge: true });
+  database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count)
+  .set({course:this.course}, { merge: true });
+  database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count)
+  .set({email:this.email}, { merge: true });
+  database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count)
+  .set({number:this.number}, { merge: true });
+ 
+  //this.studentName=database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count).name;
+  item.name=item.name+', '+this.name;
+  item.course=item.course+', '+this.course;
+  this.count++;
+  this.name="";
+  this.course="";
+  this.email="";
+  this.number="";
   alert("you have successfully been added!")
-},
+  
+},  
 fetchItems:function(){
     database.collection('groups').get().then((querySnapShot)=>{
     let item={}

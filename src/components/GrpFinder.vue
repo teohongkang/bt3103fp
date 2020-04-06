@@ -19,7 +19,7 @@
   <br />
   <br />Filter by Region:
   <br />
-  <select id="filterByRegion" name="filterByRegion" @change="onChange(event)">
+  <select id="filterByRegion" name="filterByRegion" @change="onChange(value)">
     <option value="allRegions">All Regions</option>
     <option value="north">North</option>
     <option value="south">South</option>
@@ -31,7 +31,7 @@
   <br />
   <br />Filter by Venue:
   <br />
-  <select id="filterByVenue" name="filterByVenue" @change="onChohange(event)">
+  <select id="filterByVenue" name="filterByVenue" @change="onChange(value)">
     <option value="allVenues">All Venues</option>
     <option value="cafe">Cafe</option>
     <option value="library">Library</option>
@@ -122,7 +122,10 @@ fetchItems:function(){
    // item.show=false
     item.id=doc.id
     this.itemList.push(item)
-}) }) }
+}) }) },
+onChange:function(){
+  
+}
 },
 created(){
   this.fetchItems() }

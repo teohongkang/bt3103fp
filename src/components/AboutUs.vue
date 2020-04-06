@@ -37,7 +37,7 @@
 		<br>
 
 		Your concern: <br>
-		<select id="concerns" name="concern">
+		<select id="concerns" name="concern" v-model="concernTopic">
             <option value="feedback">Feedback</option>
             <option value="work">Work with Us</option>
             <option value="report">Report a User</option>
@@ -51,12 +51,13 @@
 
 		<br><br>
 
-		<button v-on:click = "validate">Submit <i class="fa fa-envelope-o"></i></button>
+		<button v-on:click = "validate()">Submit <i class="fa fa-envelope-o"></i></button>
         <br><br>
     </div>
 </template>
 
 <script>
+import database from "../firebase.js";
 import Header from "./Header.vue"
 
     export default {
@@ -65,7 +66,9 @@ import Header from "./Header.vue"
                 image:"https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 realName:"",
                 email:"",
-                comments:""
+                comments:"",
+                concernTopic:"",
+                count:1,
             }
         },
 
@@ -81,6 +84,20 @@ import Header from "./Header.vue"
                     alert("Please enter your comments.");
                     return false;
                 } else {
+                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
+                .doc('FeedbackNumber '+this.count).set({Topic:this.concernTopic}, { merge: true });
+                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
+                .doc('FeedbackNumber '+this.count).set({name:this.realName}, { merge: true });
+                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
+                .doc('FeedbackNumber '+this.count).set({email:this.email}, { merge: true });
+                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
+                .doc('FeedbackNumber '+this.count).set({comment:this.comments}, { merge: true });
+                this.count++;
+                alert("this is update function")
+                this.realName="";
+                this.email="";
+                this.comments="";
+                this.concernTopic=""; 
                     alert("Thank you for getting in touch with us. A team member will get back to you soon.");
                 }
             }

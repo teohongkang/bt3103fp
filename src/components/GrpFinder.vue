@@ -1,5 +1,6 @@
 <template>
 <div id="main">
+  <app-header></app-header>
   <h1 style="font-size:65px">Find Your Group</h1>
   <h3>Enter your particulars</h3>Your name:
   <br />
@@ -76,6 +77,7 @@
 
 <script >
 import database from "../firebase.js";
+import Header from "./Header.vue";
 export default {
   data() {
     return {
@@ -88,6 +90,11 @@ export default {
  
     };
   },
+
+  components: {
+        "app-header": Header
+    },
+
   methods: {
 joinGroup:function(item){
  // UPDATE AND ADD DATA TO DATABASE, NOT REPLACE CURRENT DATA

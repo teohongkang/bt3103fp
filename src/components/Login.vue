@@ -20,6 +20,7 @@
 
 <script>
 import database from '../firebase.js'
+
 export default {
     data(){
         return{
@@ -30,17 +31,10 @@ export default {
     },
     methods: {
         validate: function() {
-            database.collection("users").get().then((querySnapShot)=>{
-                let user={}
-                querySnapShot.forEach(doc=>{
-                    user=doc.data()
-                    this.Allusers.push(user)
-                })
-            })
             var name = document.forms["login"]["username"].value;
             var pass = document.forms["login"]["pass"].value;
             if (name == "") {
-                alert("Please enter your NUS netid.");
+                alert("Please enter your NUS email.");
                 return false;
             } else if (pass == "") {
                 alert("Please enter your password.");
@@ -50,11 +44,14 @@ export default {
             var existUserName = false;
             var existPassword = false;
             var greetname = "" 
+            console.log(this.Allusers)
             for (const i of this.Allusers) {
+                console.log("LOOOP")
                 if (i.username == name) {
-                    existUserName = true;
+                    existUserName = !existUserName;
+                    console.log("Went in username")
                     if (i.password == pass) {
-                    existPassword = true;
+                    existPassword = !existPassword;
                     greetname = i.name;
                     } 
                 } 
@@ -67,8 +64,23 @@ export default {
                 alert("User does not exist.");
             } else if (!existPassword && existUserName) {
                 alert("Incorrect password.");
-            }            
-        }   
+            } else {
+                alert("Incorrect Username or password.Please Try again.");
+            }  
+        },
+        screenshot: function () {
+            database.collection('users').get().then((querySnapShot)=>{
+                let user={}
+                querySnapShot.forEach(doc =>{
+                    user=doc.data()
+                    this.Allusers.push(user)
+                    console.log(doc.id+"==>"+doc.data().username)
+                })
+            })
+        }
+    },
+    created() {
+        this.screenshot()
     }
 }
 </script>>

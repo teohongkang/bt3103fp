@@ -1,5 +1,6 @@
 <template>
     <div id="main">
+        <app-header></app-header>
         <h2> What is GroupFinder? </h2>
 		<h3> GroupFinder is a website that aims to allow students to find and join study groups with other NUS students staying in specific regions outside of school. We cater to students who want to join study groups according to their preferences. 
 		Students can select and filter study groups according to their preferred region, specific study venues and modules needed. They can then either join an existing study group or request to form another study group.</h3>
@@ -56,6 +57,8 @@
 </template>
 
 <script>
+import Header from "./Header.vue"
+
     export default {
         data(){
             return {
@@ -81,6 +84,10 @@
                     alert("Thank you for getting in touch with us. A team member will get back to you soon.");
                 }
             }
+        },
+        
+        components: {
+            "app-header": Header
         }
     }
 </script>

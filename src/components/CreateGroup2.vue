@@ -1,5 +1,6 @@
 <template>
     <div id="main">
+        <app-header></app-header>
         <h1>Can't find a group? Create one now!</h1>
         <form id="fm1">
             Choose Region: 
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+import Header from "./Header.vue";
 import database from '../firebase.js'
 export default {
     data(){
@@ -55,6 +57,11 @@ export default {
             }
         }
     },
+
+    components: {
+        "app-header": Header
+    },
+
     methods:{
             validate: function(){
                 if (this.chooseRegion == ""){

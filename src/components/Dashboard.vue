@@ -33,10 +33,7 @@ export default {
 }
 #chart{
   height:240px;
-  width:240px;
-  border-style: solid;
-  border-color:rgb(155, 84, 84);
-  border-width: 1px;
+  width:240px; 
   padding:30px;
   float:left;
 }

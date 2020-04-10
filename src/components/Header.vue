@@ -8,6 +8,7 @@
             <li><router-link to="/GrpFinder" exact>Find Your Group</router-link></li>
             <li><router-link to="/visuals" exact>Analytics</router-link></li>
             <li><router-link to="/AboutUs" exact>About Us</router-link></li>
+
           </ul>
         </nav>
   </div>

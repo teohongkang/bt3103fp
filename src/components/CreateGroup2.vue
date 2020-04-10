@@ -11,7 +11,6 @@
                 <option value="East">East</option>            	
                 <option value="West">West</option>
                 <option value="Central">Central</option>
-                <option value="Neither">Neither</option>
             </select>
             <br>
             <br>
@@ -32,7 +31,7 @@
             <input type="text" v-model="group.remark">
             <br>
             <br>
-            <button v-on:click.prevent="addGroup">Submit</button>
+            <button v-on:click.prevent="addGroup()">Submit</button>
         </form>
     </div>
 </template>
@@ -40,6 +39,7 @@
 <script>
 import Header from "./Header.vue";
 import database from '../firebase.js'
+
 export default {
     data(){
         return{
@@ -54,6 +54,19 @@ export default {
                 phone:"",
                 email:"",
                 course:""
+            },
+            regionCount: {
+                allRegions: 0,
+                north: 0,
+                south: 0,
+                west: 0,
+                east: 0,
+                central:0
+            },
+            venueCount: {
+                allVenues: 0,
+                cafe: 0,
+                library: 0
             }
         }
     },
@@ -63,30 +76,79 @@ export default {
     },
 
     methods:{
-            validate: function(){
-                if (this.chooseRegion == ""){
-                    alert("Please choose a region");
-                }
-                else if (this.chooseVenue == ""){
-                    alert("Please choose a venue");
-                }
-                else{
-                    alert("Group created!");
-                }
-            },
-
             addGroup:  function () {
                 //Save item to database
-                database.collection('groups').doc().set(this.group);
-                this.group.chooseRegion="";
-                this.group.chooseVenue="";
-                this.group.module1="";
-                this.group.module2="";
-                this.group.module3="";
-                this.group.remark="";
-                alert("Group created successfully")
-            
-            }
+                if (this.group.chooseRegion == "" || this.group.chooseVenue == ""){
+                    alert("Please choose a region or venue");
+                } else {
+
+                    let tempRegion = this.group.chooseRegion;
+                    let tempVenue = this.group.chooseVenue;
+
+                    /*database.collection('region').get().then((querySnapShot)=>{
+                        //Loop through each item
+                        querySnapShot.forEach(doc=>{
+                            if (doc.id == 'All Region'){
+                                this.regionCount.allRegions = doc.data().count;
+                                alert("alert message for region count in foreach loop"+ doc.data().count);
+                            }
+                        })
+                    })*/
+
+                    if (tempRegion=="All"){
+                        this.regionCount.allRegions+=1;
+                        //alert("testing to see if this method of retrieval gets anything"+database.collection('region').doc('All Region').data().count);
+                        database.collection('region').doc('All Region').update({count: this.regionCount.allRegions});
+                    } else if (tempRegion == "North"){
+                        this.regionCount.north+=1;
+                        database.collection('region').doc('North').update({count: this.regionCount.north});
+                    } else if (tempRegion == "South"){
+                        this.regionCount.south+=1;
+                        database.collection('region').doc('South').update({count: this.regionCount.south});                 
+                    } else if (tempRegion == "East"){
+                        this.regionCount.east+=1;
+                        database.collection('region').doc('East').update({count: this.regionCount.east});
+                    } else if (tempRegion == "West"){
+                        this.regionCount.west+=1;
+                        database.collection('region').doc('West').update({count: this.regionCount.west});
+                    } else {
+                        this.regionCount.central+=1;
+                        database.collection('region').doc('Central').update({count: this.regionCount.central});
+                    }
+
+                    if (tempVenue=="Venue"){
+                        this.venueCount.allVenues+=1;
+                        database.collection('venue').doc('All Venues').update({count: this.venueCount.allVenues});
+                    } else if (tempVenue == "Library"){
+                        this.venueCount.library+=1;
+                        database.collection('venue').doc('Library').update({count: this.venueCount.library});
+                    } else {
+                        this.venueCount.cafe+=1;
+                        database.collection('venue').doc('Cafe').update({count: this.venueCount.cafe});
+                    }
+
+                    database.collection('groups').doc().set(this.group);
+                    this.group.chooseRegion="";
+                    this.group.chooseVenue="";
+                    this.group.module1="";
+                    this.group.module2="";
+                    this.group.module3="";
+                    this.group.remark="";
+                    alert("Group created successfully");
+                }
+            } /*
+            addDashboard: function () {
+                let tempRegion = database.collection('dashboard').doc('region').get(this.group.chooseRegion);
+                let tempVenue = database.collection('dashboard').doc('venue').get(this.group.chooseVenue);
+
+                tempRegion+=1;
+                //alert(tempRegion);
+                tempVenue+=1;
+
+                database.collection('dashboard').doc('region').get(this.group.chooseRegion).set(tempRegion);
+                database.collection('dashboard').doc('venue').get(this.group.chooseVenue).set(tempVenue);
+            }*/
+
         }
 }
 </script>

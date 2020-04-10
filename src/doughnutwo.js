@@ -3,15 +3,20 @@ export default{
     extends:Doughnut,
     data: () => ({
         chartdata: {
-          labels: ['Results (Out of 100%)',],
+          labels: ['Results (Out of 100%)', ],
           datasets: [
-            {
+            /*{
               label: 'Benefits of Study Groups',
               data: [61.7, 38.3],
               backgroundColor:['aqua','orange'],
-              // borderWidth:0.5,
-              // borderColor:"#000"
-            }
+              borderWidth:0.5,
+              borderColor:"#000"
+            }*/
+            {
+                label: 'cnjdknd',
+                data: [55.8, 44.2],
+                backgroundColor:['aqua','red']
+              }
           ]
           
         },
@@ -29,12 +34,12 @@ export default{
                   left: 5,
                   right: 0,
                   top: 0,
-                  bottom: 10
+                  bottom: 0
               }
           },
           title:{
             display:true,
-            text:'Mean Final Results of Students in Study Groups',
+            text:'Mean Final Results of Entire Class',
             fontColor:'Black',
             fontSize:15
 

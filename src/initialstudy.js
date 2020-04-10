@@ -3,14 +3,14 @@ export default{
     extends:Bar,
     data: () => ({
         chartdata: {
-          labels: ['North', 'South','East','West', 'Central'],
+          labels: ["Not Interested", "Interested"],
           datasets: [
             {
-              label: 'Region',
-              data: [200, 150,250,100, 500],
+              label: 'Interest In Joining Study Groups',
+              data: [4, 25],
               backgroundColor:'#AA6',
-            //   borderWidth:0.5,
-            //   borderColor:"#000"
+              borderWidth:0.5,
+              borderColor:"#000"
             }
             /*{
                 label: 'R',
@@ -24,7 +24,7 @@ export default{
         options: {
             title:{
                 display:true,
-                text:'Users by Region',
+                text:'Are You Interested In Joining a Study Group',
                 fontColor:'Black',
                 fontSize:15
 

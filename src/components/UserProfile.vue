@@ -1,6 +1,7 @@
 <template>
     <body bgcolor = "#fff3e6">
 	<div class = "container">
+        <app-header></app-header>
         <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <img src = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt = "Discussion" style = "width: 100%;">
 		<div class = "content">
@@ -15,7 +16,12 @@
 </template>
 
 <script>
-
+import Header from "./Header.vue";
+export default {
+    components: {
+        "app-header": Header
+    }
+}
 </script>
 
 <style scoped>

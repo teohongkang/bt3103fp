@@ -1,5 +1,6 @@
 <template>
     <div id="main">
+        <app-header></app-header>
         <div id="chart">
             <charts></charts>
         
@@ -13,9 +14,12 @@
 <script>
 import charts from '../charts.js'
 import doughnut from '../doughnut.js'
+import Header from "./Header.vue"
+
 export default {
     components:{
-        charts,doughnut
+        charts,doughnut,
+        "app-header": Header
     }
     
 }

@@ -1,37 +1,37 @@
 <template>
 <body>
-  <div class="main">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    
-    <p class="sign">Login with NUS</p>
-        <form name="login" @submit.prevent="validate">
-        <input class= "email" name="email" type="text" align="center" placeholder="NUS email" v-model="email">
-        <input class= "pass" name="pass" type="text" align="center" placeholder="Password" v-model="pass">
-        <button value="Submit" type="submit" >Submit</button>
-        </form>
-                
-    </div>
+    <p> GroupFinder </p>
+        <div class="main">
+            <link rel="stylesheet" href="css/style.css">
+            <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+            
+            <p class="sign">Login with NUS</p>
+                <form name="login" @submit.prevent="validate">
+                <input class= "username" name="username" type="text" align="center" placeholder="NUS netid" v-model="username">
+                <input class= "pass" name="pass" type="password" align="center" placeholder="Password" v-model="pass">
+                <button value="Submit" type="submit" >Submit</button>
+                </form>
+            </div>
      
 </body>
 </template>
 
 <script>
+import database from '../firebase.js'
+
 export default {
     data(){
         return{
-            name:"",
+            username:"",
             pass:"",
-            Allusers: [{name: "Sam", email:"e0525169@u.nus.edu",password:"1234"},
-            {name: "Tom", email:"e0876234@u.nus.edu",password:"hello"},
-            {name: "Jess", email:"e0876234@u.nus.edu",password:"hello453"}] 
+            Allusers: [] 
         }
     },
     methods: {
         validate: function() {
-            var name = document.forms["login"]["email"].value;
+            var name = document.forms["login"]["username"].value;
             var pass = document.forms["login"]["pass"].value;
             if (name == "") {
                 alert("Please enter your NUS email.");
@@ -43,31 +43,62 @@ export default {
 
             var existUserName = false;
             var existPassword = false;
-            var userName = "" 
+            var greetname = "" 
+            console.log(this.Allusers)
             for (const i of this.Allusers) {
-                if (i.email == name) {
-                    existUserName = true;
+                console.log("LOOOP")
+                if (i.username == name) {
+                    existUserName = !existUserName;
+                    console.log("Went in username")
                     if (i.password == pass) {
-                    existPassword = true;
-                    userName = i.name;
+                    existPassword = !existPassword;
+                    greetname = i.name;
                     } 
                 } 
             }
 
             if (existPassword && existUserName) {
-                alert("Welcome Back, " + userName + " !");
+                alert("Welcome Back, " + greetname + "!");
+                this.$router.push(this.$route.query.redirect || '/UserProfile')
             } else if (!existUserName) {
                 alert("User does not exist.");
             } else if (!existPassword && existUserName) {
                 alert("Incorrect password.");
-            }
-            
-        }   
+            } else {
+                alert("Incorrect Username or password.Please Try again.");
+            }  
+        },
+        screenshot: function () {
+            database.collection('users').get().then((querySnapShot)=>{
+                let user={}
+                querySnapShot.forEach(doc =>{
+                    user=doc.data()
+                    this.Allusers.push(user)
+                    console.log(doc.id+"==>"+doc.data().username)
+                })
+            })
+        }
+    },
+    created() {
+        this.screenshot()
     }
 }
 </script>>
 
 <style scoped>
+
+body {
+    background-image: url("/assets/login2.png");
+    height: 100vh;
+    background-size: 1450px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    color:white ;
+
+}
+
+
 
 .main {
     background-color: #FFFFFF;
@@ -87,7 +118,7 @@ export default {
     margin-right: 35%;
 }
 
-.email {
+.username {
     width: 76%;
     color: rgb(38, 50, 56);
     font-weight: 700;
@@ -143,6 +174,6 @@ button {
     font-family: 'Ubuntu', sans-serif;
     font-size: 13px;
     margin-left:55%; 
-    }
+}
 
 </style>

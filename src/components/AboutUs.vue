@@ -1,5 +1,6 @@
 <template>
     <div id="main">
+        <app-header></app-header>
         <h2> What is GroupFinder? </h2>
 		<h3> GroupFinder is a website that aims to allow students to find and join study groups with other NUS students staying in specific regions outside of school. We cater to students who want to join study groups according to their preferences. 
 		Students can select and filter study groups according to their preferred region, specific study venues and modules needed. They can then either join an existing study group or request to form another study group.</h3>
@@ -36,7 +37,7 @@
 		<br>
 
 		Your concern: <br>
-		<select id="concerns" name="concern">
+		<select id="concerns" name="concern" v-model="concernTopic">
             <option value="feedback">Feedback</option>
             <option value="work">Work with Us</option>
             <option value="report">Report a User</option>
@@ -50,19 +51,24 @@
 
 		<br><br>
 
-		<button v-on:click = "validate">Submit <i class="fa fa-envelope-o"></i></button>
+		<button v-on:click = "validate()">Submit <i class="fa fa-envelope-o"></i></button>
         <br><br>
     </div>
 </template>
 
 <script>
+import database from "../firebase.js";
+import Header from "./Header.vue"
+
     export default {
         data(){
             return {
                 image:"https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 realName:"",
                 email:"",
-                comments:""
+                comments:"",
+                concernTopic:"",
+                count:1,
             }
         },
 
@@ -78,9 +84,27 @@
                     alert("Please enter your comments.");
                     return false;
                 } else {
+                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
+                .doc('FeedbackNumber '+this.count).set({Topic:this.concernTopic}, { merge: true });
+                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
+                .doc('FeedbackNumber '+this.count).set({name:this.realName}, { merge: true });
+                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
+                .doc('FeedbackNumber '+this.count).set({email:this.email}, { merge: true });
+                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
+                .doc('FeedbackNumber '+this.count).set({comment:this.comments}, { merge: true });
+                this.count++;
+                alert("this is update function")
+                this.realName="";
+                this.email="";
+                this.comments="";
+                this.concernTopic=""; 
                     alert("Thank you for getting in touch with us. A team member will get back to you soon.");
                 }
             }
+        },
+        
+        components: {
+            "app-header": Header
         }
     }
 </script>

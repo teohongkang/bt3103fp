@@ -20,6 +20,7 @@
 
 <script>
 import database from '../firebase.js'
+import store from '../store.js'
 
 export default {
     data(){
@@ -43,7 +44,11 @@ export default {
 
             var existUserName = false;
             var existPassword = false;
-            var greetname = "" 
+            var greetname = ""; 
+
+            var course = "";
+            var contactno = "";
+            var email = "";
             console.log(this.Allusers)
             for (const i of this.Allusers) {
                 console.log("LOOOP")
@@ -53,12 +58,20 @@ export default {
                     if (i.password == pass) {
                     existPassword = !existPassword;
                     greetname = i.name;
+                    course = i.course;
+                    contactno = i.contactno;
+                    email = i.email;
                     } 
                 } 
             }
 
             if (existPassword && existUserName) {
+                //console.log(store.state.user.username);
                 alert("Welcome Back, " + greetname + "!");
+                
+                store.commit('loginUser',{globalusername: name, globalname: greetname, 
+                globalcontact: contactno, globalcourse: course, globalemail: email})
+                
                 this.$router.push(this.$route.query.redirect || '/UserProfile')
             } else if (!existUserName) {
                 alert("User does not exist.");

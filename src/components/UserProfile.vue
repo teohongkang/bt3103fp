@@ -5,7 +5,7 @@
         <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <img src = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt = "Discussion" style = "width: 100%;">
 		<div class = "content">
-			<h1>Hello! <br> Welcome to GroupFinder! Click to join a group now.</h1>
+			<h1>Hello {{print}}! <br> Welcome to GroupFinder! Click to join a group now.</h1>
 			<button value = "Find Group" onclick="document.location = 'grpfinder.html'"><i class="fa fa-group"></i> Find Group</button>
 			<button value = "Create Group" id = "continue" onclick="document.location = 'creategroup.html'"><i class="fa fa-pencil-square-o"></i> Create Group</button>
 			<button value = "About Us" id = "continue" onclick="document.location = 'aboutus.html'"><i class="fa fa-info-circle"></i> About Us</button>
@@ -17,7 +17,14 @@
 
 <script>
 import Header from "./Header.vue";
+import store from '../store.js'
+
 export default {
+    data() {
+        return {
+            print: store.state.user.name
+        }
+    },
     components: {
         "app-header": Header
     }

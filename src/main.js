@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
 import Routes from './routes.js'
+import {store} from "./store"
 
 
 //Step 1 -- Import and use VueRouter
@@ -21,6 +22,7 @@ const myRouter = new VueRouter({
 });
 
 new Vue({
+  store,
   render: h => h(App),
   router:myRouter
 }).$mount('#app')

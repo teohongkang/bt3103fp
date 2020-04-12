@@ -38,7 +38,8 @@
 
 <script>
 import Header from "./Header.vue";
-import database from '../firebase.js'
+import database from '../firebase.js';
+import store from '../store.js';
 
 export default {
     data(){
@@ -50,10 +51,10 @@ export default {
                 module2:"",
                 module3:"",
                 remark:"",
-                name:"",
-                phone:"",
-                email:"",
-                course:""
+                name: store.state.user.name,
+                phone: store.state.user.contact,
+                email: store.state.user.email,
+                course: store.state.user.course
             },
             regionCount: {
                 allRegions: 0,

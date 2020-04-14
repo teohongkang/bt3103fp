@@ -20,23 +20,26 @@
   <br />
   <br />Filter by Region:
   <br />
-  <select id="filterByRegion" name="filterByRegion" @change="onChange(value)">
-    <option value="allRegions">All Regions</option>
-    <option value="north">North</option>
-    <option value="south">South</option>
-    <option value="east">East</option>
-    <option value="west">West</option>
-    <option value="central">Central</option>
-    <option value="neither">Neither</option>
+  <select v-model="selectedRegion" id="filterByRegion" name="filterByRegion">
+    <option value="All Regions">All Regions</option>
+    <option value="North">North</option>
+    <option value="South">South</option>
+    <option value="East">East</option>
+    <option value="West">West</option>
+    <option value="Central">Central</option>
+    <option value="Neither">Neither</option>
   </select>
+  <span>selectedRegion: {{ this.selectedRegion }}</span>
+
   <br />
   <br />Filter by Venue:
   <br />
-  <select id="filterByVenue" name="filterByVenue" @change="onChange(value)">
-    <option value="allVenues">All Venues</option>
-    <option value="cafe">Cafe</option>
-    <option value="library">Library</option>
+  <select v-model="selectedVenue" id="filterByVenue" name="filterByVenue">
+    <option value="All Venues">All Venues</option>
+    <option value="Cafe">Cafe</option>
+    <option value="Library">Library</option>
   </select>
+  <span>selectedVenue: {{ this.selectedVenue }}</span>
 
   <br />
   <h1 style="font-size:30px">Available Groups:</h1>
@@ -44,7 +47,7 @@
   <body>
     <div id="app">
       <ul>
-        <li v-for="item in itemList" v-bind:key="item.id">
+        <li v-for="item in filterRegion" v-bind:key="item.id">
           <div style="white-space: pre-line;">Region: {{item.chooseRegion}}</div>
           <div style="white-space: pre-line;">Venue: {{item.chooseVenue}}</div>
           <div style="white-space: pre-line;">Course: {{item.course}}</div>
@@ -60,6 +63,7 @@
             <i class="fas fa-user-plus"></i>
           </button>
           <div style="white-space: pre-line;">-------------------------------</div>
+          <br />
         </li>
       </ul>
 
@@ -86,12 +90,47 @@ export default {
       course: "",
       email: "",
       number: "",
-      count: 1
+      count: 1,
+      selectedRegion: "",
+      selectedVenue: ""
     };
   },
 
   components: {
     "app-header": Header
+  },
+
+  computed: {
+    filterRegion: function() {
+      return this.itemList
+        .filter(
+          this.selectedRegion == "All Regions"
+            ? () => true
+            : i => i.chooseRegion == this.selectedRegion
+        )
+        .filter(
+          this.selectedVenue == "All Venues"
+            ? () => true
+            : i => i.chooseVenue == this.selectedVenue
+        );
+      //return this.itemList.filter(function(i) {
+      //console.log(this.selectedRegion);
+      //return i.chooseRegion == this.selectedRegion;
+      //});
+    }
+
+    // filterVenue: function() {
+    //   return this.itemList.filter(
+    //     this.selectedRegion == "All Venues"
+    //       ? () => true
+    //       : i => i.chooseVenue == this.selectedVenue
+    //   );
+    //i => i.chooseVenue == this.selectedVenue);
+    // return this.itemList.filter(function(i) {
+    //   //console.log(i);
+    //   return i.chooseVenue == this.selectedVenue;
+    //   });
+    // }
   },
 
   methods: {
@@ -148,8 +187,7 @@ export default {
             this.itemList.push(item);
           });
         });
-    },
-    onChange: function() {}
+    }
   },
   created() {
     this.fetchItems();

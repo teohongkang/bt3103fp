@@ -30,11 +30,11 @@
         <br>
 
         <div id="chart">
-            <usersbyvenue></usersbyvenue>
+            <usersbyregion></usersbyregion>
         </div>
 
         <div id="chart">
-            <usersbyregion></usersbyregion>
+            <usersbyvenue></usersbyvenue>
         </div>
         </div>
         

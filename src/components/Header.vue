@@ -1,13 +1,18 @@
 <template>
   <div class="headerStyle">
+    <link rel="stylesheet" href="css/style.css">
+            <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
         <nav>
-          <h1>{{ title }}</h1>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+          <h1>{{ msg }}</h1>
           <ul>
-            <li><router-link to="/UserProfile" exact>My Profile</router-link></li>
-            <li><router-link to="/CreateGroup" exact>Create Group</router-link></li>
-            <li><router-link to="/GrpFinder" exact>Find Your Group</router-link></li>
-            <li><router-link to="/visuals" exact>Analytics</router-link></li>
-            <li><router-link to="/AboutUs" exact>About Us</router-link></li>
+            <li><router-link tag="li" to="/UserProfile" exact>My Profile <i class="fa fa-user-circle-o"></i></router-link></li>
+            <li><router-link tag="li" to="/GrpFinder" exact>Find Your Group	<i class="fa fa-search"></i></router-link></li>
+            <li><router-link tag="li" to="/CreateGroup" exact>Create Group <i class="fa fa-pencil"></i></router-link></li>
+            <li><router-link tag="li" to="/visuals" exact>Analytics <i class="fa fa-line-chart"></i></router-link></li>
+            <li><router-link tag="li" to="/AboutUs" exact>About Us <i class="fa fa-envelope-o"></i></router-link></li>
 
           </ul>
         </nav>
@@ -19,7 +24,7 @@ export default {
   
   data(){
     return{
-        msg: 'Grocery List'
+        msg: 'GroupFinder'
         }
   },
   props:{
@@ -32,8 +37,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import url("https://kit.fontawesome.com/a076d05399.js");
 header{
-    background:rgb(122, 63, 100);
+    background:#16A085;
     padding:6px;
     border-style: solid;
     border-color:black;
@@ -41,11 +47,13 @@ header{
 }
 h1{
     color:ivory;
-    background: rgb(122, 63, 100);
-    font-size: 30px;
+    background:#16A085;
+    font-size: 50px;
+    font-family: 'Ubuntu', sans-serif;
+
 }
 nav{
-    background: rgb(122, 63, 100);
+    background: #16A085;
     padding: 14px 0;
     margin-bottom: 40px;
 }
@@ -55,13 +63,14 @@ nav{
 }
 ul{
     list-style-type: none;
-    text-align: left;
-    margin: 0;
+    text-align: center;
+    margin: 10;
+    color:ivory;
 }
 li{
     
-    display: inline-block;
-    margin: 0 10px;
+    display: inline;
+    margin: 0 30px;
 }
 li a{
   

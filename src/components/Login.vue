@@ -49,6 +49,11 @@ export default {
             var course = "";
             var contactno = "";
             var email = "";
+            var module1 = "";
+            var module2 = "";
+            var module3 = "";
+            var module4 = "";
+            var module5 = "";
             console.log(this.Allusers)
             for (const i of this.Allusers) {
                 console.log("LOOOP")
@@ -61,6 +66,11 @@ export default {
                     course = i.course;
                     contactno = i.contactno;
                     email = i.email;
+                    module1 = i.module1;
+                    module2 = i.module2;
+                    module3 = i.module3;
+                    module4 = i.module4;
+                    module5 = i.module5
                     } 
                 } 
             }
@@ -70,7 +80,9 @@ export default {
                 alert("Welcome Back, " + greetname + "!");
                 
                 store.commit('loginUser',{globalusername: name, globalname: greetname, 
-                globalcontact: contactno, globalcourse: course, globalemail: email})
+                globalcontact: contactno, globalcourse: course, globalemail: email,
+                globalmodule1: module1, globalmodule2: module2, globalmodule3: module3,
+                globalmodule4: module4, globalmodule5: module5})
                 
                 this.$router.push(this.$route.query.redirect || '/UserProfile')
             } else if (!existUserName) {
@@ -107,7 +119,7 @@ body {
     overflow: hidden;
     background-repeat: no-repeat;
     background-attachment:fixed;
-    color:white ;
+    color:white;
 
 }
 

@@ -6,7 +6,7 @@ export default {
     data: function () {
         return {
             datacollection: {
-                labels: ["All Regions","Central", "North", "South", "East", "West"],
+                labels: ["All Regions", "Central", "East", "North", "South", "West"],
                 datasets: [{
                     label: "Users by regions",
                     data: [],
@@ -17,7 +17,7 @@ export default {
                 legend: { display: false },
                 title: {
                 display: true,
-                text: 'Groups by region'
+                text: 'Groups by Region'
                 },
                 responsive: true,
                 maintainAspectRatio: false

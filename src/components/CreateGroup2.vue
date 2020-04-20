@@ -39,8 +39,7 @@
 <script>
 import Header from "./Header.vue";
 import database from '../firebase.js';
-import store from '../store.js'
-
+import store from '../store.js';
 export default {
     data(){
         return{
@@ -51,10 +50,10 @@ export default {
                 module2:"",
                 module3:"",
                 remark:"",
-                name:store.state.user.name,
-                phone:store.state.user.contact,
-                email:store.state.user.email,
-                course:store.state.user.course
+                name: store.state.user.name,
+                phone: store.state.user.contact,
+                email: store.state.user.email,
+                course: store.state.user.course
             },
             regionCount: {
                 allRegions: 0,
@@ -62,7 +61,7 @@ export default {
                 south: 0,
                 west: 0,
                 east: 0,
-                central:0
+                central: 0
             },
             venueCount: {
                 allVenues: 0,
@@ -71,38 +70,52 @@ export default {
             }
         }
     },
-
     components: {
         "app-header": Header
     },
-    /*
-    store.state.user.username (to access username)
-    store.state.user.name (person’s name)
-    store.state.user.contact (contact no)
-    store.state.user.course
-    store.state.user.email 
-    */
+    created(){
+        var allRegions = database.collection("region").doc("All Region");
+        var north = database.collection("region").doc("North");
+        var south = database.collection("region").doc("South");
+        var east = database.collection("region").doc("East");
+        var west = database.collection("region").doc("West");
+        var central = database.collection("region").doc("Central");
+        
+        var allVenues = database.collection("venue").doc("All Venues");
+        var cafe = database.collection("venue").doc("Cafe");
+        var library = database.collection("venue").doc("Library");
 
+        allRegions.get().then(doc => {this.regionCount.allRegions = doc.data().count;})
+        north.get().then(doc => {this.regionCount.north = doc.data().count;})
+        south.get().then(doc => {this.regionCount.south = doc.data().count;})
+        east.get().then(doc => {this.regionCount.east = doc.data().count;})
+        west.get().then(doc => {this.regionCount.west = doc.data().count;})
+        central.get().then(doc => {this.regionCount.central = doc.data().count;})
+        
+        allVenues.get().then(doc => {this.venueCount.allVenues = doc.data().count;})
+        cafe.get().then(doc => {this.venueCount.cafe = doc.data().count;})
+        library.get().then(doc => {this.venueCount.library = doc.data().count;})
+        
+        // this.regionCount.allRegions = database.collection('region').doc('All Region').get().data().count;
+        // this.regionCount.north = database.collection('region').doc('North').data().count;
+        // this.regionCount.south = database.collection('region').doc('South').data().count;
+        // this.regionCount.east = database.collection('region').doc('East').data().count;
+        // this.regionCount.west = database.collection('region').doc('West').data().count;
+        // this.regionCount.central = database.collection('region').doc('Central').data().count;
+        
+        // this.venueCount.allVenues = database.collection('venue').doc('All Venues').data().count;
+        // this.venueCount.cafe = database.collection('venue').doc('Cafe').data().count;
+        // this.venueCount.library = database.collection('venue').doc('Library').data().count;
+    },
     methods:{
             addGroup:  function () {
                 //Save item to database
                 if (this.group.chooseRegion == "" || this.group.chooseVenue == ""){
                     alert("Please choose a region or venue");
                 } else {
-
                     let tempRegion = this.group.chooseRegion;
                     let tempVenue = this.group.chooseVenue;
-
-                    /*database.collection('region').get().then((querySnapShot)=>{
-                        //Loop through each item
-                        querySnapShot.forEach(doc=>{
-                            if (doc.id == 'All Region'){
-                                this.regionCount.allRegions = doc.data().count;
-                                alert("alert message for region count in foreach loop"+ doc.data().count);
-                            }
-                        })
-                    })*/
-
+                    
                     if (tempRegion=="All"){
                         this.regionCount.allRegions+=1;
                         alert("region count for all regions is: "+this.regionCount.allRegions);
@@ -129,7 +142,6 @@ export default {
                         this.regionCount.central+=1;
                         database.collection('region').doc('Central').set({count: this.regionCount.central});
                     }
-
                     if (tempVenue=="Venue"){
                         this.venueCount.allVenues+=1;
                         database.collection('venue').doc('All Venues').set({count: this.venueCount.allVenues});
@@ -142,7 +154,6 @@ export default {
                         this.venueCount.cafe+=1;
                         database.collection('venue').doc('Cafe').set({count: this.venueCount.cafe});
                     }
-
                     database.collection('groups').doc().set(this.group);
                     this.group.chooseRegion="";
                     this.group.chooseVenue="";
@@ -156,15 +167,12 @@ export default {
             addDashboard: function () {
                 let tempRegion = database.collection('dashboard').doc('region').get(this.group.chooseRegion);
                 let tempVenue = database.collection('dashboard').doc('venue').get(this.group.chooseVenue);
-
                 tempRegion+=1;
                 //alert(tempRegion);
                 tempVenue+=1;
-
                 database.collection('dashboard').doc('region').get(this.group.chooseRegion).set(tempRegion);
                 database.collection('dashboard').doc('venue').get(this.group.chooseVenue).set(tempVenue);
             }*/
-
         }
 }
 </script>
@@ -174,7 +182,6 @@ export default {
     margin: 20px auto;
     max-width: 500px;
 }
-
 p{
     align-content: center;
     color:ivory;
@@ -184,17 +191,14 @@ label{
     margin: 20px 0 10px;
     width:50%;
     align-content: flex-start;
-
 }
 input[type="text"]{
     display: inline-block;
     width:50%;
 }
-
 select{
     
 }
-
 button {
     cursor: pointer;
     border-radius: 5em;

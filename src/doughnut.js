@@ -16,14 +16,14 @@ export default{
           
         },
         options: {
-            scales:{
-                yAxes:[{
-                    ticks:{
-                        min:0
-                    }
+            // scales:{
+            //     yAxes:[{
+            //         ticks:{
+            //             min:0
+            //         }
 
-                }]
-            },
+            //     }]
+            // },
             layout:{
               padding:{
                   left: 5,

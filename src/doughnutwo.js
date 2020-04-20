@@ -15,7 +15,7 @@ export default{
             {
                 label: 'cnjdknd',
                 data: [55.8, 44.2],
-                backgroundColor:['aqua','red']
+                backgroundColor:['#16A085','red']
               }
           ]
           

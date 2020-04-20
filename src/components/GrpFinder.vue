@@ -298,108 +298,108 @@ export default {
 // ];
 </script>
 
-// var membersA = ["Member 1", "Member 2"];
-// var membersB = ["Member 1", "Member 2", "Member 3"];
-// var membersC = ["Member 1", "Member 2", "Member 3", "Member 4", "Member 5"];
-// var membersD = ["Member 1", "Member 2"];
-// var membersE = ["Member 1"];
-// var membersF = ["Member 1", "Member 2", "Member 3"];
-// var membersG = ["Member 1", "Member 2", "Member 3", "Member 4"];
-// var membersH = ["Member 1", "Member 2"];
-// var membersI = ["Member 1", "Member 2"];
-// var membersJ = ["Member 1", "Member 2", "Member 3", "Member 4"];
-// var membersK = ["Member 1"];
+<!--// var membersA = ["Member 1", "Member 2"];-->
+<!--// var membersB = ["Member 1", "Member 2", "Member 3"];-->
+<!--// var membersC = ["Member 1", "Member 2", "Member 3", "Member 4", "Member 5"];-->
+<!--// var membersD = ["Member 1", "Member 2"];-->
+<!--// var membersE = ["Member 1"];-->
+<!--// var membersF = ["Member 1", "Member 2", "Member 3"];-->
+<!--// var membersG = ["Member 1", "Member 2", "Member 3", "Member 4"];-->
+<!--// var membersH = ["Member 1", "Member 2"];-->
+<!--// var membersI = ["Member 1", "Member 2"];-->
+<!--// var membersJ = ["Member 1", "Member 2", "Member 3", "Member 4"];-->
+<!--// var membersK = ["Member 1"];-->
 
-// itemsListInput: [
-//   {
-//     title: "Study Group A",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "North",
-//     currMembers: membersA.length,
-//     modules: "BT3103, CS2040"
-//   },
-//   {
-//     title: "Study Group B",
-//     type: "study group",
-//     venue: "Library",
-//     region: "North",
-//     currMembers: membersB.length,
-//     modules: "GEQ1000, ST3200"
-//   },
-//   {
-//     title: "Study Group C",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "South",
-//     modules: "GES3450",
-//     currMembers: membersC.length
-//   },
-//   {
-//     title: "Study Group D",
-//     type: "study group",
-//     venue: "Library",
-//     region: "South",
-//     currMembers: membersD.length,
-//     modules: "No Preference"
-//   },
-//   {
-//     title: "Study Group E",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "East",
-//     currMembers: membersE.length,
-//     modules: "ACC1701, GET2302"
-//   },
-//   {
-//     title: "Study Group F",
-//     type: "study group",
-//     venue: "Library",
-//     region: "East",
-//     currMembers: membersF.length,
-//     modules: "No Preference"
-//   },
-//   {
-//     title: "Study Group G",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "West",
-//     currMembers: membersG.length,
-//     modules: "BT3102, CS2030"
-//   },
-//   {
-//     title: "Study Group H",
-//     type: "study group",
-//     venue: "Library",
-//     region: "West",
-//     currMembers: membersH.length,
-//     modules: "GEH1071, IS2101"
-//   },
-//   {
-//     title: "Study Group I",
-//     type: "study group",
-//     venue: "Library",
-//     region: "Central",
-//     currMembers: membersI.length,
-//     modules: "No Preference"
-//   },
-//   {
-//     title: "Study Group K",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "Central",
-//     currMembers: membersK.length,
-//     modules: "IS3421"
-//   },
-//   {
-//     title: "Study Group J",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "Central",
-//     currMembers: membersJ.length,
-//     modules: "CS4032"
-//   }
-// ];
+<!--// itemsListInput: [-->
+<!--//   {-->
+<!--//     title: "Study Group A",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Cafe",-->
+<!--//     region: "North",-->
+<!--//     currMembers: membersA.length,-->
+<!--//     modules: "BT3103, CS2040"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group B",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Library",-->
+<!--//     region: "North",-->
+<!--//     currMembers: membersB.length,-->
+<!--//     modules: "GEQ1000, ST3200"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group C",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Cafe",-->
+<!--//     region: "South",-->
+<!--//     modules: "GES3450",-->
+<!--//     currMembers: membersC.length-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group D",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Library",-->
+<!--//     region: "South",-->
+<!--//     currMembers: membersD.length,-->
+<!--//     modules: "No Preference"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group E",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Cafe",-->
+<!--//     region: "East",-->
+<!--//     currMembers: membersE.length,-->
+<!--//     modules: "ACC1701, GET2302"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group F",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Library",-->
+<!--//     region: "East",-->
+<!--//     currMembers: membersF.length,-->
+<!--//     modules: "No Preference"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group G",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Cafe",-->
+<!--//     region: "West",-->
+<!--//     currMembers: membersG.length,-->
+<!--//     modules: "BT3102, CS2030"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group H",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Library",-->
+<!--//     region: "West",-->
+<!--//     currMembers: membersH.length,-->
+<!--//     modules: "GEH1071, IS2101"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group I",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Library",-->
+<!--//     region: "Central",-->
+<!--//     currMembers: membersI.length,-->
+<!--//     modules: "No Preference"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group K",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Cafe",-->
+<!--//     region: "Central",-->
+<!--//     currMembers: membersK.length,-->
+<!--//     modules: "IS3421"-->
+<!--//   },-->
+<!--//   {-->
+<!--//     title: "Study Group J",-->
+<!--//     type: "study group",-->
+<!--//     venue: "Cafe",-->
+<!--//     region: "Central",-->
+<!--//     currMembers: membersJ.length,-->
+<!--//     modules: "CS4032"-->
+<!--//   }-->
+<!--// ];-->
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

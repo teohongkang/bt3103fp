@@ -2,13 +2,14 @@
     <div id="main">
 
         <app-header></app-header>
+        <h1> Dashboard Generated From Our Survey and Research </h1>
         <p id="initial study">
         Based on our experience, we realized that there may be a lot of students living outside NUS who do not wish to travel all the way to school anytime they want to study in groups. Therefore, we conducted a survey among 40 NUS students to find out their opinion about finding schoolmates living near them and forming a study group that way. The results show that of all students who do not currently have a study group, most of them are open to the idea.
             <div id="chart1">
                 <initialstudy></initialstudy>
             </div>
         
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         
         <div id="research study">
         <br>
@@ -22,8 +23,8 @@
             <doughnutwo></doughnutwo>
         </div>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <h1> Dashboard Generated From Our Database</h1>
         <br>
         <div id="user study">
         These supportive results motivate us to create our website Group Finder. With the data gathered from other pages, we decided to visualize the number of groups created per region and type of venue to get a better understanding of our customers.

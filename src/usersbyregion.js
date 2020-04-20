@@ -6,7 +6,7 @@ export default {
     data: function () {
         return {
             datacollection: {
-                labels: ["All Regions", "North", "South", "East", "West"],
+                labels: ["All Regions","Central", "North", "South", "East", "West"],
                 datasets: [{
                     label: "Users by regions",
                     data: [],

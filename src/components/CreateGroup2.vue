@@ -38,7 +38,8 @@
 
 <script>
 import Header from "./Header.vue";
-import database from '../firebase.js'
+import database from '../firebase.js';
+import store from '../store.js'
 
 export default {
     data(){
@@ -50,10 +51,10 @@ export default {
                 module2:"",
                 module3:"",
                 remark:"",
-                name:"",
-                phone:"",
-                email:"",
-                course:""
+                name:store.state.user.name,
+                phone:store.state.user.contact,
+                email:store.state.user.email,
+                course:store.state.user.course
             },
             regionCount: {
                 allRegions: 0,
@@ -74,6 +75,13 @@ export default {
     components: {
         "app-header": Header
     },
+    /*
+    store.state.user.username (to access username)
+    store.state.user.name (person’s name)
+    store.state.user.contact (contact no)
+    store.state.user.course
+    store.state.user.email 
+    */
 
     methods:{
             addGroup:  function () {
@@ -97,34 +105,42 @@ export default {
 
                     if (tempRegion=="All"){
                         this.regionCount.allRegions+=1;
+                        alert("region count for all regions is: "+this.regionCount.allRegions);
                         //alert("testing to see if this method of retrieval gets anything"+database.collection('region').doc('All Region').data().count);
-                        database.collection('region').doc('All Region').update({count: this.regionCount.allRegions});
-                    } else if (tempRegion == "North"){
+                        database.collection('region').doc('All Region').set({count: this.regionCount.allRegions});
+                    } 
+                    if (tempRegion == "North"){
                         this.regionCount.north+=1;
-                        database.collection('region').doc('North').update({count: this.regionCount.north});
-                    } else if (tempRegion == "South"){
+                        database.collection('region').doc('North').set({count: this.regionCount.north});
+                    } 
+                    if (tempRegion == "South"){
                         this.regionCount.south+=1;
-                        database.collection('region').doc('South').update({count: this.regionCount.south});                 
-                    } else if (tempRegion == "East"){
+                        database.collection('region').doc('South').set({count: this.regionCount.south});                 
+                    } 
+                    if (tempRegion == "East"){
                         this.regionCount.east+=1;
-                        database.collection('region').doc('East').update({count: this.regionCount.east});
-                    } else if (tempRegion == "West"){
+                        database.collection('region').doc('East').set({count: this.regionCount.east});
+                    } 
+                    if (tempRegion == "West"){
                         this.regionCount.west+=1;
-                        database.collection('region').doc('West').update({count: this.regionCount.west});
-                    } else {
+                        database.collection('region').doc('West').set({count: this.regionCount.west});
+                    } 
+                    if (tempRegion == "Central") {
                         this.regionCount.central+=1;
-                        database.collection('region').doc('Central').update({count: this.regionCount.central});
+                        database.collection('region').doc('Central').set({count: this.regionCount.central});
                     }
 
                     if (tempVenue=="Venue"){
                         this.venueCount.allVenues+=1;
-                        database.collection('venue').doc('All Venues').update({count: this.venueCount.allVenues});
-                    } else if (tempVenue == "Library"){
+                        database.collection('venue').doc('All Venues').set({count: this.venueCount.allVenues});
+                    } 
+                    if (tempVenue == "Library"){
                         this.venueCount.library+=1;
-                        database.collection('venue').doc('Library').update({count: this.venueCount.library});
-                    } else {
+                        database.collection('venue').doc('Library').set({count: this.venueCount.library});
+                    } 
+                    if (tempVenue == "Cafe") {
                         this.venueCount.cafe+=1;
-                        database.collection('venue').doc('Cafe').update({count: this.venueCount.cafe});
+                        database.collection('venue').doc('Cafe').set({count: this.venueCount.cafe});
                     }
 
                     database.collection('groups').doc().set(this.group);

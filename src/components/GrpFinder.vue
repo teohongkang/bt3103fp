@@ -56,7 +56,8 @@
           <div style="white-space: pre-line;"><b>Module 1:</b> {{item.module1}}</div>
           <div style="white-space: pre-line;"><b>Module 2:</b> {{item.module2}}</div>
           <div style="white-space: pre-line;"><b>Module 3:</b> {{item.module3}}</div>
-          <div style="white-space: pre-line;"><b>Name(s):</b> {{item.name}}</div>
+          <div style="white-space: pre-line;"><b>Group Creator:</b> {{item.name}}</div>
+          <div style="white-space: pre-line;"><b>Group Members:</b> {{item.members}}</div>
           <div style="white-space: pre-line;"><b>Remarks:</b> {{item.remark}}</div>
           <br>
           <button v-bind:id="item.id" v-on:click="joinGroup(item)">
@@ -150,8 +151,21 @@ export default {
         .doc("NewStudentInfo" + this.count)
         .set({ number: this.number }, { merge: true });
 
+      if (item.members == " ") {
+        database
+        .collection("groups")
+        .doc(item.id)
+        .set({ members: item.members + this.name }, { merge: true });
+      } else {
+        database
+        .collection("groups")
+        .doc(item.id)
+        .set({ members: item.members + ", " + this.name }, { merge: true });
+      }
+         
+
       //this.studentName=database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count).name;
-      item.name = item.name + ", " + this.name;
+      //item.name = item.name + ", " + this.name;
       item.course = item.course + ", " + this.course;
       this.count++;
       // this.name = "";

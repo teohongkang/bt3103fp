@@ -50,6 +50,7 @@ export default {
                 module2:"",
                 module3:"",
                 remark:"",
+                members:" ",
                 name: store.state.user.name,
                 phone: store.state.user.contact,
                 email: store.state.user.email,
@@ -161,6 +162,7 @@ export default {
                     this.group.module2="";
                     this.group.module3="";
                     this.group.remark="";
+                    this.group.members=" ";
                     alert("Group created successfully");
                 }
             } /*

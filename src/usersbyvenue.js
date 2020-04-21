@@ -6,7 +6,7 @@ export default {
   data: function () {
     return {
         datacollection: {
-            labels: ['Any Venues', 'Cafe', 'Library'],
+            labels: ['All Venues', 'Cafe', 'Library', 'Zoom'],
             datasets: [{
                 label: "Groups by Venue",
                 data: [],

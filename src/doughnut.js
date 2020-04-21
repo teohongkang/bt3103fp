@@ -8,7 +8,7 @@ export default{
             {
               label: 'Benefits of Study Groups',
               data: [61.7, 38.3],
-              backgroundColor:['aqua','orange'],
+              backgroundColor:['#16A085','orange'],
               // borderWidth:0.5,
               // borderColor:"#000"
             }

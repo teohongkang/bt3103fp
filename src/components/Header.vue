@@ -48,9 +48,8 @@ header{
 h1{
     color:ivory;
     background:#16A085;
-    font-size: 50px;
+    font-size: 60px;
     font-family: 'Ubuntu', sans-serif;
-
 }
 nav{
     background: #16A085;
@@ -71,6 +70,8 @@ li{
     
     display: inline;
     margin: 0 30px;
+    font-size: 20px;
+    cursor: pointer;
 }
 li a{
   

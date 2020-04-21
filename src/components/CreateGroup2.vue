@@ -19,6 +19,7 @@
                 <option value="Venue">All Venues</option>
                 <option value="Cafe">Cafe</option>
                 <option value="Library">Library</option>
+                <option value="Zoom">Zoom</option>
             </select>
             <br>
             <label>Module preference 1: </label>
@@ -67,7 +68,8 @@ export default {
             venueCount: {
                 allVenues: 0,
                 cafe: 0,
-                library: 0
+                library: 0,
+                zoom: 0
             }
         }
     },
@@ -85,7 +87,7 @@ export default {
         var allVenues = database.collection("venue").doc("All Venues");
         var cafe = database.collection("venue").doc("Cafe");
         var library = database.collection("venue").doc("Library");
-
+        var zoom = database.collection("venue").doc("Zoom");
         allRegions.get().then(doc => {this.regionCount.allRegions = doc.data().count;})
         north.get().then(doc => {this.regionCount.north = doc.data().count;})
         south.get().then(doc => {this.regionCount.south = doc.data().count;})
@@ -96,6 +98,7 @@ export default {
         allVenues.get().then(doc => {this.venueCount.allVenues = doc.data().count;})
         cafe.get().then(doc => {this.venueCount.cafe = doc.data().count;})
         library.get().then(doc => {this.venueCount.library = doc.data().count;})
+        zoom.get().then(doc => {this.venueCount.zoom = doc.data().count;})
         
         // this.regionCount.allRegions = database.collection('region').doc('All Region').get().data().count;
         // this.regionCount.north = database.collection('region').doc('North').data().count;
@@ -155,6 +158,10 @@ export default {
                         this.venueCount.cafe+=1;
                         database.collection('venue').doc('Cafe').set({count: this.venueCount.cafe});
                     }
+                    if (tempVenue == "Zoom") {
+                        this.venueCount.zoom+=1;
+                        database.collection('venue').doc('Zoom').set({count: this.venueCount.zoom});
+                    }                    
                     database.collection('groups').doc().set(this.group);
                     this.group.chooseRegion="";
                     this.group.chooseVenue="";

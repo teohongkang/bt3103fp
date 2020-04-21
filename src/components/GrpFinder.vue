@@ -1,3 +1,4 @@
+  
 <template>
 <div id="main">
   <app-header></app-header>
@@ -38,6 +39,7 @@
     <option value="All Venues" selected >All Venues</option>
     <option value="Cafe">Cafe</option>
     <option value="Library">Library</option>
+    <option value="Zoom">Zoom</option>
   </select>
   <!-- <span>{{ this.selectedVenue }}</span> -->
 
@@ -100,11 +102,9 @@ export default {
       selectedVenue: "All Venues"
     };
   },
-
   components: {
     "app-header": Header
   },
-
   computed: {
     filterRegion: function() {
       return this.itemList
@@ -122,10 +122,8 @@ export default {
     }
 
   },
-
   methods: {
     joinGroup: function(item) {
-
       database
         .collection("groups")
         .doc(item.id)
@@ -194,6 +192,7 @@ export default {
   }
 };
 
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -208,7 +207,6 @@ export default {
     padding-top: 10px;
   border: 1px solid #555555;
 }
-
 p {
   align-content: center;
   color: ivory;
@@ -238,4 +236,6 @@ button{
     font-size: 13px;
      
 }
+
 </style>
+

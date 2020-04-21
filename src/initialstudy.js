@@ -6,7 +6,7 @@ export default{
           labels: ["Not Interested", "Interested"],
           datasets: [
             {
-              label: 'Interest In Joining Study Groups',
+              label: 'Number of Students',
               data: [4, 25],
               backgroundColor:'#AA6',
               borderWidth:0.5,
@@ -24,7 +24,7 @@ export default{
         options: {
             title:{
                 display:true,
-                text:'Are You Interested In Joining a Study Group',
+                text:'Are You Interested In Joining a Study Group?',
                 fontColor:'Black',
                 fontSize:15
 

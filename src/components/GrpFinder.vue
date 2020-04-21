@@ -2,7 +2,7 @@
 <div id="main">
   <app-header></app-header>
   <h1 style="font-size:65px">Find Your Group</h1>
-  <h3>Enter your particulars</h3>Your name:
+  <!-- <h3>Enter your particulars</h3>Your name:
   <br />
   <input type="text" v-model="name" />
   <br />
@@ -16,7 +16,7 @@
   <br />
   <br />Contact Number:
   <br />
-  <input type="text" v-model="number" />
+  <input type="text" v-model="number" /> -->
   <br />
   <br />Filter by Region:
   <br />
@@ -29,17 +29,18 @@
     <option value="Central">Central</option>
     <option value="Neither">Neither</option>
   </select>
-  <span>selectedRegion: {{ this.selectedRegion }}</span>
+  <!-- <span>{{ this.selectedRegion }}</span> -->
 
   <br />
   <br />Filter by Venue:
   <br />
   <select v-model="selectedVenue" id="filterByVenue" name="filterByVenue">
-    <option value="All Venues">All Venues</option>
+    <option value="All Venues" selected >All Venues</option>
     <option value="Cafe">Cafe</option>
     <option value="Library">Library</option>
+    <option value="Zoom">Zoom</option>
   </select>
-  <span>selectedVenue: {{ this.selectedVenue }}</span>
+  <!-- <span>{{ this.selectedVenue }}</span> -->
 
   <br />
   <h1 style="font-size:30px">Available Groups:</h1>
@@ -48,21 +49,25 @@
     <div id="app">
       <ul>
         <li v-for="item in filterRegion" v-bind:key="item.id">
-          <div style="white-space: pre-line;">Region: {{item.chooseRegion}}</div>
-          <div style="white-space: pre-line;">Venue: {{item.chooseVenue}}</div>
-          <div style="white-space: pre-line;">Course: {{item.course}}</div>
-          <div style="white-space: pre-line;">Email: {{item.email}}</div>
-          <div style="white-space: pre-line;">Module 1: {{item.module1}}</div>
-          <div style="white-space: pre-line;">Module 2: {{item.module2}}</div>
-          <div style="white-space: pre-line;">Module 3: {{item.module3}}</div>
-          <div style="white-space: pre-line;">Name(s): {{item.name}}</div>
-          <div style="white-space: pre-line;">Phone Number: {{item.phone}}</div>
-          <div style="white-space: pre-line;">Remarks: {{item.remark}}</div>
+          <div style="white-space: pre-line;"><b>Region:</b> {{item.chooseRegion}}</div>
+          <div style="white-space: pre-line;"><b>Venue:</b> {{item.chooseVenue}}</div>
+          <div style="white-space: pre-line;"><b>Group Creator's Email:</b> {{item.email}}</div>
+          <div style="white-space: pre-line;"><b>Group Creator's Phone Number:</b> {{item.phone}}</div>
+          <div style="white-space: pre-line;"><b>Student's Course:</b> {{item.course}}</div>          
+          <div style="white-space: pre-line;"><b>Module 1:</b> {{item.module1}}</div>
+          <div style="white-space: pre-line;"><b>Module 2:</b> {{item.module2}}</div>
+          <div style="white-space: pre-line;"><b>Module 3:</b> {{item.module3}}</div>
+          <div style="white-space: pre-line;"><b>Group Creator:</b> {{item.name}}</div>
+          <div style="white-space: pre-line;"><b>Group Members:</b> {{item.members}}</div>
+          <div style="white-space: pre-line;"><b>Remarks:</b> {{item.remark}}</div>
+          <br>
           <button v-bind:id="item.id" v-on:click="joinGroup(item)">
             Submit
             <i class="fas fa-user-plus"></i>
           </button>
-          <div style="white-space: pre-line;">-------------------------------</div>
+          
+          <div style="white-space: pre-line;">--------------------------------------------------------------------------------------</div>
+          <br><br/>
           <br />
         </li>
       </ul>
@@ -80,26 +85,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
 
 <script >
+import store from '../store.js';
 import database from "../firebase.js";
 import Header from "./Header.vue";
 export default {
   data() {
     return {
       itemList: [],
-      name: "",
-      course: "",
-      email: "",
-      number: "",
+      name: store.state.user.name,
+      course: store.state.user.course,
+      email: store.state.user.email,
+      number: store.state.user.contact,
       count: 1,
-      selectedRegion: "",
-      selectedVenue: ""
+      selectedRegion: "All Regions",
+      selectedVenue: "All Venues"
     };
   },
-
   components: {
     "app-header": Header
   },
-
   computed: {
     filterRegion: function() {
       return this.itemList
@@ -113,32 +117,10 @@ export default {
             ? () => true
             : i => i.chooseVenue == this.selectedVenue
         );
-      //return this.itemList.filter(function(i) {
-      //console.log(this.selectedRegion);
-      //return i.chooseRegion == this.selectedRegion;
-      //});
     }
-
-    // filterVenue: function() {
-    //   return this.itemList.filter(
-    //     this.selectedRegion == "All Venues"
-    //       ? () => true
-    //       : i => i.chooseVenue == this.selectedVenue
-    //   );
-    //i => i.chooseVenue == this.selectedVenue);
-    // return this.itemList.filter(function(i) {
-    //   //console.log(i);
-    //   return i.chooseVenue == this.selectedVenue;
-    //   });
-    // }
   },
-
   methods: {
     joinGroup: function(item) {
-      // UPDATE AND ADD DATA TO DATABASE, NOT REPLACE CURRENT DATA
-      //  database.collection('groups').doc(item.id).set({Nextname:this.name}, { merge: true });
-      //  alert("you have successfully been added!")
-
       database
         .collection("groups")
         .doc(item.id)
@@ -163,15 +145,26 @@ export default {
         .collection("studentInfo")
         .doc("NewStudentInfo" + this.count)
         .set({ number: this.number }, { merge: true });
-
+      if (item.members == " ") {
+        database
+        .collection("groups")
+        .doc(item.id)
+        .set({ members: item.members + this.name }, { merge: true });
+      } else {
+        database
+        .collection("groups")
+        .doc(item.id)
+        .set({ members: item.members + ", " + this.name }, { merge: true });
+      }
+         
       //this.studentName=database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count).name;
-      item.name = item.name + ", " + this.name;
+      //item.name = item.name + ", " + this.name;
       item.course = item.course + ", " + this.course;
       this.count++;
-      this.name = "";
-      this.course = "";
-      this.email = "";
-      this.number = "";
+      // this.name = "";
+      // this.course = "";
+      // this.email = "";
+      // this.number = "";
       alert("you have successfully been added!");
     },
     fetchItems: function() {
@@ -193,224 +186,24 @@ export default {
     this.fetchItems();
   }
 };
-
-// var membersA = ["Member 1", "Member 2"];
-// var membersB = ["Member 1", "Member 2", "Member 3"];
-// var membersC = ["Member 1", "Member 2", "Member 3", "Member 4", "Member 5"];
-// var membersD = ["Member 1", "Member 2"];
-// var membersE = ["Member 1"];
-// var membersF = ["Member 1", "Member 2", "Member 3"];
-// var membersG = ["Member 1", "Member 2", "Member 3", "Member 4"];
-// var membersH = ["Member 1", "Member 2"];
-// var membersI = ["Member 1", "Member 2"];
-// var membersJ = ["Member 1", "Member 2", "Member 3", "Member 4"];
-// var membersK = ["Member 1"];
-
-// itemsListInput: [
-//   {
-//     title: "Study Group A",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "North",
-//     currMembers: membersA.length,
-//     modules: "BT3103, CS2040"
-//   },
-//   {
-//     title: "Study Group B",
-//     type: "study group",
-//     venue: "Library",
-//     region: "North",
-//     currMembers: membersB.length,
-//     modules: "GEQ1000, ST3200"
-//   },
-//   {
-//     title: "Study Group C",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "South",
-//     modules: "GES3450",
-//     currMembers: membersC.length
-//   },
-//   {
-//     title: "Study Group D",
-//     type: "study group",
-//     venue: "Library",
-//     region: "South",
-//     currMembers: membersD.length,
-//     modules: "No Preference"
-//   },
-//   {
-//     title: "Study Group E",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "East",
-//     currMembers: membersE.length,
-//     modules: "ACC1701, GET2302"
-//   },
-//   {
-//     title: "Study Group F",
-//     type: "study group",
-//     venue: "Library",
-//     region: "East",
-//     currMembers: membersF.length,
-//     modules: "No Preference"
-//   },
-//   {
-//     title: "Study Group G",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "West",
-//     currMembers: membersG.length,
-//     modules: "BT3102, CS2030"
-//   },
-//   {
-//     title: "Study Group H",
-//     type: "study group",
-//     venue: "Library",
-//     region: "West",
-//     currMembers: membersH.length,
-//     modules: "GEH1071, IS2101"
-//   },
-//   {
-//     title: "Study Group I",
-//     type: "study group",
-//     venue: "Library",
-//     region: "Central",
-//     currMembers: membersI.length,
-//     modules: "No Preference"
-//   },
-//   {
-//     title: "Study Group K",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "Central",
-//     currMembers: membersK.length,
-//     modules: "IS3421"
-//   },
-//   {
-//     title: "Study Group J",
-//     type: "study group",
-//     venue: "Cafe",
-//     region: "Central",
-//     currMembers: membersJ.length,
-//     modules: "CS4032"
-//   }
-// ];
 </script>
-
-<!--// var membersA = ["Member 1", "Member 2"];-->
-<!--// var membersB = ["Member 1", "Member 2", "Member 3"];-->
-<!--// var membersC = ["Member 1", "Member 2", "Member 3", "Member 4", "Member 5"];-->
-<!--// var membersD = ["Member 1", "Member 2"];-->
-<!--// var membersE = ["Member 1"];-->
-<!--// var membersF = ["Member 1", "Member 2", "Member 3"];-->
-<!--// var membersG = ["Member 1", "Member 2", "Member 3", "Member 4"];-->
-<!--// var membersH = ["Member 1", "Member 2"];-->
-<!--// var membersI = ["Member 1", "Member 2"];-->
-<!--// var membersJ = ["Member 1", "Member 2", "Member 3", "Member 4"];-->
-<!--// var membersK = ["Member 1"];-->
-
-<!--// itemsListInput: [-->
-<!--//   {-->
-<!--//     title: "Study Group A",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Cafe",-->
-<!--//     region: "North",-->
-<!--//     currMembers: membersA.length,-->
-<!--//     modules: "BT3103, CS2040"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group B",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Library",-->
-<!--//     region: "North",-->
-<!--//     currMembers: membersB.length,-->
-<!--//     modules: "GEQ1000, ST3200"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group C",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Cafe",-->
-<!--//     region: "South",-->
-<!--//     modules: "GES3450",-->
-<!--//     currMembers: membersC.length-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group D",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Library",-->
-<!--//     region: "South",-->
-<!--//     currMembers: membersD.length,-->
-<!--//     modules: "No Preference"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group E",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Cafe",-->
-<!--//     region: "East",-->
-<!--//     currMembers: membersE.length,-->
-<!--//     modules: "ACC1701, GET2302"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group F",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Library",-->
-<!--//     region: "East",-->
-<!--//     currMembers: membersF.length,-->
-<!--//     modules: "No Preference"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group G",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Cafe",-->
-<!--//     region: "West",-->
-<!--//     currMembers: membersG.length,-->
-<!--//     modules: "BT3102, CS2030"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group H",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Library",-->
-<!--//     region: "West",-->
-<!--//     currMembers: membersH.length,-->
-<!--//     modules: "GEH1071, IS2101"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group I",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Library",-->
-<!--//     region: "Central",-->
-<!--//     currMembers: membersI.length,-->
-<!--//     modules: "No Preference"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group K",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Cafe",-->
-<!--//     region: "Central",-->
-<!--//     currMembers: membersK.length,-->
-<!--//     modules: "IS3421"-->
-<!--//   },-->
-<!--//   {-->
-<!--//     title: "Study Group J",-->
-<!--//     type: "study group",-->
-<!--//     venue: "Cafe",-->
-<!--//     region: "Central",-->
-<!--//     currMembers: membersJ.length,-->
-<!--//     modules: "CS4032"-->
-<!--//   }-->
-<!--// ];-->
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #app {
   margin: 20px auto;
   max-width: 500px;
+  background: rgb(163, 220, 228);
+     padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  border: 1px solid #555555;
 }
-
 p {
   align-content: center;
   color: ivory;
+  
 }
 label {
   display: inline-block;
@@ -421,5 +214,19 @@ label {
 input[type="text"] {
   display: inline-block;
   width: 50%;
+}
+button{
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: #16A085;
+    border: 1px solid #555555;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+     
 }
 </style>

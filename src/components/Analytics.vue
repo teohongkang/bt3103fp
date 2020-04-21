@@ -25,9 +25,8 @@
         </ul>
         
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-        <br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        
         <div id="user study">
         These supportive results motivate us to create our website Group Finder. With the data gathered from other pages, we decided to visualize the number of groups created per region and type of venue to get a better understanding of our customers.
         <br>

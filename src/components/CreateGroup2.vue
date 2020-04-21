@@ -51,6 +51,7 @@ export default {
                 module2:"",
                 module3:"",
                 remark:"",
+                members: " ",
                 name: store.state.user.name,
                 phone: store.state.user.contact,
                 email: store.state.user.email,
@@ -136,13 +137,13 @@ export default {
                     } else if (tempVenue == "Library"){
                         this.venueCount.library+=1;
                         database.collection('venue').doc('Library').update({count: this.venueCount.library});
-                    } else if (tempVenue == "Cafe"){
-                        this.venueCount.cafe+=1;
-                        database.collection('venue').doc('Cafe').update({count: this.venueCount.cafe});
-                    }
-                    else {
+                    } else if (tempVenue == "Zoom"){
                         this.venueCount.zoom+=1;
                         database.collection('venue').doc('Zoom').update({count: this.venueCount.zoom});
+                    }
+                    else {
+                        this.venueCount.cafe+=1;
+                        database.collection('venue').doc('Cafe').update({count: this.venueCount.cafe});
                     }
                     database.collection('groups').doc().set(this.group);
                     this.group.chooseRegion="";
@@ -151,6 +152,7 @@ export default {
                     this.group.module2="";
                     this.group.module3="";
                     this.group.remark="";
+                    this.group.members = " ";
                     alert("Group created successfully");
                 }
             }

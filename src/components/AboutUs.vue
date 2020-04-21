@@ -28,15 +28,15 @@
 
 		<h2> Contact Us </h2>
 		
-		Your name: <br>
+		<!-- Your Name: <br>
 		<input type="text" name="realname" v-model="realName"/><br>
-		<br>
+		<br> -->
 
-		Your email: <br>
+		Your Preferred Email: <br>
 		<input type="text" name="email" v-model="email"/><br>
 		<br>
 
-		Your concern: <br>
+		Your Concern: <br>
 		<select id="concerns" name="concern" v-model="concernTopic">
             <option value="feedback">Feedback</option>
             <option value="work">Work with Us</option>
@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import store from '../store.js';
 import database from "../firebase.js";
 import Header from "./Header.vue"
 
@@ -64,7 +65,7 @@ import Header from "./Header.vue"
         data(){
             return {
                 image:"https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                realName:"",
+                realName:store.state.user.name,
                 email:"",
                 comments:"",
                 concernTopic:"",
@@ -112,8 +113,8 @@ import Header from "./Header.vue"
 <style scoped>
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 #main {
-	font-family: "Book Antiqua";
-    text-align: left;
+	/* font-family: "Book Antiqua"; */
+    /* text-align: left; */
     font-size: small;
 
 }
@@ -132,9 +133,9 @@ button {
 	cursor: pointer;
 	font-family: "Book Antiqua"; */
     cursor: pointer;
-    border-radius: 5em;
     color: #fff;
     background: #16A085;
+    border-radius: 5em;
     border: 1px solid #555555;
     padding-left: 40px;
     padding-right: 40px;
@@ -149,14 +150,14 @@ input {
 	padding: 5px 10px;
 	border-radius: 2px;
 	border: 1px solid #555555;
-	font-family: "Book Antiqua";
+	/* font-family: "Book Antiqua"; */
 }
 
 select {
 	padding: 2px;
 	border-radius: 1px;
 	border: 1px solid #555555;
-	font-family: "Book Antiqua";
+	/* font-family: "Book Antiqua"; */
 }
 
 h3 {

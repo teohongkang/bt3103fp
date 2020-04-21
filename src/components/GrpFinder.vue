@@ -1,8 +1,8 @@
-  
+
 <template>
 <div id="main">
   <app-header></app-header>
-  <h1 style="font-size:65px">Find Your Group</h1>
+  <h1 >Find Your Group</h1>
   <!-- <h3>Enter your particulars</h3>Your name:
   <br />
   <input type="text" v-model="name" />
@@ -18,7 +18,7 @@
   <br />Contact Number:
   <br />
   <input type="text" v-model="number" /> -->
-  <br />
+ 
   <br />Filter by Region:
   <br />
   <select v-model="selectedRegion" id="filterByRegion" name="filterByRegion">
@@ -42,9 +42,9 @@
     <option value="Zoom">Zoom</option>
   </select>
   <!-- <span>{{ this.selectedVenue }}</span> -->
-
+<br>
   <br />
-  <h1 style="font-size:30px">Available Groups:</h1>
+  <h1>Available Groups:</h1>
   <br />
   <body>
     <div id="app">
@@ -102,9 +102,11 @@ export default {
       selectedVenue: "All Venues"
     };
   },
+
   components: {
     "app-header": Header
   },
+
   computed: {
     filterRegion: function() {
       return this.itemList
@@ -122,8 +124,10 @@ export default {
     }
 
   },
+
   methods: {
     joinGroup: function(item) {
+
       database
         .collection("groups")
         .doc(item.id)
@@ -160,7 +164,7 @@ export default {
         .doc(item.id)
         .set({ members: item.members + ", " + this.name }, { merge: true });
       }
-         
+
 
       //this.studentName=database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count).name;
       //item.name = item.name + ", " + this.name;
@@ -206,7 +210,10 @@ export default {
     padding-bottom: 10px;
     padding-top: 10px;
   border: 1px solid #555555;
+  font-size: 13px;
+  
 }
+
 p {
   align-content: center;
   color: ivory;

@@ -23,13 +23,13 @@
             </select>
             <br>
             <label>Module preference 1: </label>
-            <input type="text" v-model="group.module1">
+            <input type="text" v-model="group.module1"> <br>
             <label>Module preference 2: </label>
-            <input type="text" v-model="group.module2">
+            <input type="text" v-model="group.module2"> <br>
             <label>Module preference 3: </label>
-            <input type="text" v-model="group.module3">
-            <label>Remarks: </label>
-            <input type="text" v-model="group.remark">
+            <input type="text" v-model="group.module3"> <br>
+            <label> Remarks: </label>
+            <input type="text" v-model="group.remark"> <br>
             <br>
             <br>
             <button v-on:click.prevent="addGroup()">Submit</button>
@@ -198,16 +198,14 @@ p{
 label{
     display: inline-block;
     margin: 20px 0 10px;
-    width:50%;
+    width:150px;
     align-content: flex-start;
 }
 input[type="text"]{
     display: inline-block;
-    width:50%;
+    width:40%;
 }
-select{
-    
-}
+
 button {
     cursor: pointer;
     border-radius: 5em;

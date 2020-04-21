@@ -115,7 +115,7 @@ import Header from "./Header.vue"
 	font-family: "Book Antiqua";
     text-align: left;
     font-size: small;
-    margin-left: 48px;
+
 }
 
 image {
@@ -126,11 +126,23 @@ image {
 }
 
 button {
-	border-radius: 4px;
+	/* border-radius: 4px;
 	border: 1px solid #555555;
 	padding: 10px 15px;
 	cursor: pointer;
-	font-family: "Book Antiqua";
+	font-family: "Book Antiqua"; */
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: #16A085;
+    border: 1px solid #555555;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+
 }
 
 input {

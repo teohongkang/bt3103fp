@@ -118,7 +118,9 @@ export default {
             ? () => true
             : i => i.chooseVenue == this.selectedVenue
         );
+
     }
+
   },
   methods: {
     joinGroup: function(item) {
@@ -146,6 +148,7 @@ export default {
         .collection("studentInfo")
         .doc("NewStudentInfo" + this.count)
         .set({ number: this.number }, { merge: true });
+
       if (item.members == " ") {
         database
         .collection("groups")
@@ -158,6 +161,7 @@ export default {
         .set({ members: item.members + ", " + this.name }, { merge: true });
       }
          
+
       //this.studentName=database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count).name;
       //item.name = item.name + ", " + this.name;
       item.course = item.course + ", " + this.course;
@@ -187,6 +191,8 @@ export default {
     this.fetchItems();
   }
 };
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -230,4 +236,6 @@ button{
     font-size: 13px;
      
 }
+
 </style>
+

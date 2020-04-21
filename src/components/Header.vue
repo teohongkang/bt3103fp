@@ -67,6 +67,7 @@ ul{
     color:ivory;
 }
 li{
+    
     display: inline;
     margin: 0 30px;
     font-size: 20px;

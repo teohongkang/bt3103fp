@@ -51,7 +51,7 @@ export default {
                 module2:"",
                 module3:"",
                 remark:"",
-                members: " ",
+                members:" ",
                 name: store.state.user.name,
                 phone: store.state.user.contact,
                 email: store.state.user.email,
@@ -69,7 +69,7 @@ export default {
                 allVenues: 0,
                 cafe: 0,
                 library: 0,
-                zoom: 0,
+                zoom: 0
             }
         }
     },
@@ -88,7 +88,6 @@ export default {
         var cafe = database.collection("venue").doc("Cafe");
         var library = database.collection("venue").doc("Library");
         var zoom = database.collection("venue").doc("Zoom");
-
         allRegions.get().then(doc => {this.regionCount.allRegions = doc.data().count;})
         north.get().then(doc => {this.regionCount.north = doc.data().count;})
         south.get().then(doc => {this.regionCount.south = doc.data().count;})
@@ -100,6 +99,17 @@ export default {
         cafe.get().then(doc => {this.venueCount.cafe = doc.data().count;})
         library.get().then(doc => {this.venueCount.library = doc.data().count;})
         zoom.get().then(doc => {this.venueCount.zoom = doc.data().count;})
+        
+        // this.regionCount.allRegions = database.collection('region').doc('All Region').get().data().count;
+        // this.regionCount.north = database.collection('region').doc('North').data().count;
+        // this.regionCount.south = database.collection('region').doc('South').data().count;
+        // this.regionCount.east = database.collection('region').doc('East').data().count;
+        // this.regionCount.west = database.collection('region').doc('West').data().count;
+        // this.regionCount.central = database.collection('region').doc('Central').data().count;
+        
+        // this.venueCount.allVenues = database.collection('venue').doc('All Venues').data().count;
+        // this.venueCount.cafe = database.collection('venue').doc('Cafe').data().count;
+        // this.venueCount.library = database.collection('venue').doc('Library').data().count;
     },
     methods:{
             addGroup:  function () {
@@ -112,39 +122,46 @@ export default {
                     
                     if (tempRegion=="All"){
                         this.regionCount.allRegions+=1;
+                        alert("region count for all regions is: "+this.regionCount.allRegions);
                         //alert("testing to see if this method of retrieval gets anything"+database.collection('region').doc('All Region').data().count);
-                        database.collection('region').doc('All Region').update({count: this.regionCount.allRegions});
-                    } else if (tempRegion == "North"){
+                        database.collection('region').doc('All Region').set({count: this.regionCount.allRegions});
+                    } 
+                    if (tempRegion == "North"){
                         this.regionCount.north+=1;
-                        database.collection('region').doc('North').update({count: this.regionCount.north});
-                    } else if (tempRegion == "South"){
+                        database.collection('region').doc('North').set({count: this.regionCount.north});
+                    } 
+                    if (tempRegion == "South"){
                         this.regionCount.south+=1;
-                        database.collection('region').doc('South').update({count: this.regionCount.south});                 
-                    } else if (tempRegion == "East"){
+                        database.collection('region').doc('South').set({count: this.regionCount.south});                 
+                    } 
+                    if (tempRegion == "East"){
                         this.regionCount.east+=1;
-                        database.collection('region').doc('East').update({count: this.regionCount.east});
-                    } else if (tempRegion == "West"){
+                        database.collection('region').doc('East').set({count: this.regionCount.east});
+                    } 
+                    if (tempRegion == "West"){
                         this.regionCount.west+=1;
-                        database.collection('region').doc('West').update({count: this.regionCount.west});
-                    } else {
+                        database.collection('region').doc('West').set({count: this.regionCount.west});
+                    } 
+                    if (tempRegion == "Central") {
                         this.regionCount.central+=1;
-                        database.collection('region').doc('Central').update({count: this.regionCount.central});
+                        database.collection('region').doc('Central').set({count: this.regionCount.central});
                     }
-                    
                     if (tempVenue=="Venue"){
                         this.venueCount.allVenues+=1;
-                        database.collection('venue').doc('All Venues').update({count: this.venueCount.allVenues});
-                    } else if (tempVenue == "Library"){
+                        database.collection('venue').doc('All Venues').set({count: this.venueCount.allVenues});
+                    } 
+                    if (tempVenue == "Library"){
                         this.venueCount.library+=1;
-                        database.collection('venue').doc('Library').update({count: this.venueCount.library});
-                    } else if (tempVenue == "Zoom"){
-                        this.venueCount.zoom+=1;
-                        database.collection('venue').doc('Zoom').update({count: this.venueCount.zoom});
-                    }
-                    else {
+                        database.collection('venue').doc('Library').set({count: this.venueCount.library});
+                    } 
+                    if (tempVenue == "Cafe") {
                         this.venueCount.cafe+=1;
-                        database.collection('venue').doc('Cafe').update({count: this.venueCount.cafe});
+                        database.collection('venue').doc('Cafe').set({count: this.venueCount.cafe});
                     }
+                    if (tempVenue == "Zoom") {
+                        this.venueCount.zoom+=1;
+                        database.collection('venue').doc('Zoom').set({count: this.venueCount.zoom});
+                    }                    
                     database.collection('groups').doc().set(this.group);
                     this.group.chooseRegion="";
                     this.group.chooseVenue="";
@@ -152,10 +169,19 @@ export default {
                     this.group.module2="";
                     this.group.module3="";
                     this.group.remark="";
-                    this.group.members = " ";
+                    this.group.members=" ";
                     alert("Group created successfully");
                 }
-            }
+            } /*
+            addDashboard: function () {
+                let tempRegion = database.collection('dashboard').doc('region').get(this.group.chooseRegion);
+                let tempVenue = database.collection('dashboard').doc('venue').get(this.group.chooseVenue);
+                tempRegion+=1;
+                //alert(tempRegion);
+                tempVenue+=1;
+                database.collection('dashboard').doc('region').get(this.group.chooseRegion).set(tempRegion);
+                database.collection('dashboard').doc('venue').get(this.group.chooseVenue).set(tempVenue);
+            }*/
         }
 }
 </script>

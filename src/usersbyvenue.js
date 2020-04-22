@@ -28,7 +28,6 @@ export default {
     fetchItems: function () {
       database.collection('venue').get().then(querySnapShot => {
         querySnapShot.forEach(doc => { 
-            //this.datacollection.labels.push(doc.data().country)
             this.datacollection.datasets[0].data.push(doc.data().count)
         })
         this.renderChart(this.datacollection, this.options)

@@ -40,7 +40,7 @@
                 <div class="w3-col m12">
                 <div class="w3-card w3-round w3-white">
                     <br>
-                    <h1 class=center>My Created Groups</h1>
+                    <h1 class=center>Created Groups</h1>
                     <hr class="w3-clear">
                     <div class="w3-container w3-padding">
                             <div id="app">
@@ -62,7 +62,7 @@
                 <br>
                 <div class="w3-card w3-round w3-white">
                     <br>
-                    <h1 class=center>My Joined Groups</h1>
+                    <h1 class=center>Joined Groups</h1>
                     <hr class="w3-clear">
                     <div class="w3-container w3-padding">
                             <div id="app">

@@ -8,15 +8,10 @@ export default{
             {
               label: 'Number of Students',
               data: [4, 25],
-              backgroundColor:'#AA6',
+              backgroundColor:'#16A085',
               borderWidth:0.5,
               borderColor:"#000"
             }
-            /*{
-                label: 'R',
-                data: [40, 30,10,15],
-                backgroundColor:'#7C1'
-              }*/
           ]
           
         },

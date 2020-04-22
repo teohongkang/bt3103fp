@@ -9,21 +9,12 @@ export default{
               label: 'Benefits of Study Groups',
               data: [61.7, 38.3],
               backgroundColor:['#16A085','orange'],
-              // borderWidth:0.5,
-              // borderColor:"#000"
             }
           ]
           
         },
         options: {
-            // scales:{
-            //     yAxes:[{
-            //         ticks:{
-            //             min:0
-            //         }
 
-            //     }]
-            // },
             layout:{
               padding:{
                   left: 5,

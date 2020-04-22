@@ -10,7 +10,7 @@ export default {
                 datasets: [{
                     label: "Users by regions",
                     data: [],
-                    backgroundColor:'#AA6'
+                    backgroundColor:'#16A085'
                 }]
             },
             options: {
@@ -28,7 +28,6 @@ export default {
         fetchItems: function () {
             database.collection('region').get().then(querySnapShot => {
                 querySnapShot.forEach(doc => { 
-                //this.datacollection.labels.push(doc.data().country)
                     this.datacollection.datasets[0].data.push(doc.data().count)
                 })
             this.renderChart(this.datacollection, this.options)

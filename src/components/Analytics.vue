@@ -27,12 +27,12 @@
                 </li>
             </ul>
         </div>
-
+        <br><br>
         <h1> Dashboard Generated From Our Database</h1>
-        <br>
+  
+        <p>These supportive results motivate us to create our website Group Finder. With the data gathered from other pages, we decided to visualize the number of groups created per region and type of venue to get a better understanding of our customers.</p>
         <div id="user study">
-        These supportive results motivate us to create our website Group Finder. With the data gathered from other pages, we decided to visualize the number of groups created per region and type of venue to get a better understanding of our customers.
-        <br>
+    
 
         <div id="wrap">
             <ul id="chart">
@@ -127,5 +127,10 @@ export default {
     width: 100%;
     height: 370px;
     
+}
+p{
+    padding: 2px 250px 30px;
+    text-align:justify;
+    font-size: 15px;
 }
 </style>

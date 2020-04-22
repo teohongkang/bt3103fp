@@ -42,12 +42,12 @@
         <li v-for="item in filterRegion" v-bind:key="item.id">
           
           <div style="white-space: pre-line;"><b>Region:</b> {{item.chooseRegion}}</div>
-          <div style="white-space: pre-line;"><b>Venue:</b> {{item.chooseVenue}}</div>
-          <div style="white-space: pre-line;"><b>Student's Course:</b> {{item.course}}</div>          
+          <div style="white-space: pre-line;"><b>Venue:</b> {{item.chooseVenue}}</div>         
           <div style="white-space: pre-line;"><b>Module 1:</b> {{item.module1}}</div>
           <div style="white-space: pre-line;"><b>Module 2:</b> {{item.module2}}</div>
           <div style="white-space: pre-line;"><b>Module 3:</b> {{item.module3}}</div>
           <div style="white-space: pre-line;"><b>Group Creator:</b> {{item.name}}</div>
+          <div style="white-space: pre-line;"><b>Group Creator's Course:</b> {{item.course}}</div> 
           <div style="white-space: pre-line;"><b>Group Members:</b> {{item.members}}</div>
           <div style="white-space: pre-line;"><b>Remarks:</b> {{item.remark}}</div>
           <br>
@@ -160,8 +160,6 @@ export default {
         .set({ members: item.members + ", " + this.name }, { merge: true });
       }
 
-      item.course = item.course + ", " + this.course;
-      alert("after operation count"+this.counter);
 
       alert("you have successfully been added!");
     }},

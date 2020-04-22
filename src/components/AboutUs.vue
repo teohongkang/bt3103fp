@@ -1,15 +1,15 @@
 <template>
     <div id="main">
         <app-header></app-header>
-        <h2> What is GroupFinder? </h2>
-		<h3> GroupFinder is a website that aims to allow students to find and join study groups with other NUS students staying in specific regions outside of school. We cater to students who want to join study groups according to their preferences. 
-		Students can select and filter study groups according to their preferred region, specific study venues and modules needed. They can then either join an existing study group or request to form another study group.</h3>
+        <h1> What is GroupFinder? </h1>
+		<p> GroupFinder is a website that aims to allow students to find and join study groups with other NUS students staying in specific regions outside of school. We cater to students who want to join study groups according to their preferences. 
+		Students can select and filter study groups according to their preferred region, specific study venues and modules needed. They can then either join an existing study group or request to form another study group.</p>
 
 		<br>
 
-		<h2> Who are we? </h2>
+		<h1> Who are we? </h1>
 		<img v-bind:src="image"/>
-		<h3> The team behind GroupFinder are a group of NUS students who saw that there was a lack of service to help students not living on campus find a study group and we decided that we would like to create a platform where these students can also find a study group as easily as their peers who live in halls and RCs. </h3>
+		<p> The team behind GroupFinder are a group of NUS students who saw that there was a lack of service to help students not living on campus find a study group and we decided that we would like to create a platform where these students can also find a study group as easily as their peers who live in halls and RCs. </p>
 
 		<br>
 
@@ -72,10 +72,7 @@ import Header from "./Header.vue"
 
         methods:{
             validate:function(){
-                if (this.realName == "") {
-                    alert("Please enter your name.");
-                    return false;
-                } else if (this.email == "") {
+                if (this.email == "") {
                     alert("Please enter your email.");
                     return false;
                 } else if (this.comments == "") {
@@ -86,7 +83,6 @@ import Header from "./Header.vue"
                 database.collection('testfeedback').doc('testfeedbacknum'+this.count)
                 .set({Topic: this.concernTopic, name:this.realName, email:this.email, comment:this.comments}, { merge: true });
 
-                this.realName="";
                 this.email="";
                 this.comments="";
                 this.concernTopic=""; 
@@ -156,4 +152,9 @@ h3 {
 	line-height: 200%;
 }
 ul { list-style-type:none; }
+p{
+    padding: 2px 250px 30px;
+    text-align:justify;
+    font-size: 15px;
+}
 </style>

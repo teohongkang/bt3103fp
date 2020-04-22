@@ -9,14 +9,7 @@ export default{
               label: 'Region',
               data: [200, 150,250,100, 500],
               backgroundColor:'#AA6',
-            //   borderWidth:0.5,
-            //   borderColor:"#000"
             }
-            /*{
-                label: 'R',
-                data: [40, 30,10,15],
-                backgroundColor:'#7C1'
-              }*/
           ]
           
         },

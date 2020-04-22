@@ -5,13 +5,7 @@ export default{
         chartdata: {
           labels: ['Results (Out of 100%)', ],
           datasets: [
-            /*{
-              label: 'Benefits of Study Groups',
-              data: [61.7, 38.3],
-              backgroundColor:['aqua','orange'],
-              borderWidth:0.5,
-              borderColor:"#000"
-            }*/
+
             {
                 label: 'cnjdknd',
                 data: [55.8, 44.2],
@@ -21,14 +15,7 @@ export default{
           
         },
         options: {
-            // scales:{
-            //     yAxes:[{
-            //         ticks:{
-            //             min:0
-            //         }
 
-            //     }]
-            // },
             layout:{
               padding:{
                   left: 5,

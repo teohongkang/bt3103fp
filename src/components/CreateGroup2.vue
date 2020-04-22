@@ -31,8 +31,8 @@
             <label> Remarks: </label>
             <input type="text" v-model="group.remark"> <br>
             <br>
-            <br>
-            <button v-on:click.prevent="addGroup()">Submit</button>
+            
+            <button v-on:click.prevent="addGroup()">Submit</button><br><br><br>
         </form>
     </div>
 </template>

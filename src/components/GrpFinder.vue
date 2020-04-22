@@ -2,58 +2,47 @@
 <template>
 <div id="main">
   <app-header></app-header>
-  <h1 >Find Your Group</h1>
-  <!-- <h3>Enter your particulars</h3>Your name:
-  <br />
-  <input type="text" v-model="name" />
-  <br />
-  <br />Your Course:
-  <br />
-  <input type="text" name="email" v-model="course" />
-  <br />
-  <br />NUS Email:
-  <br />
-  <input type="text" v-model="email" />
-  <br />
-  <br />Contact Number:
-  <br />
-  <input type="text" v-model="number" /> -->
- 
-  <br />Filter by Region:
-  <br />
-  <select v-model="selectedRegion" id="filterByRegion" name="filterByRegion">
-    <option value="All Regions">All Regions</option>
-    <option value="North">North</option>
-    <option value="South">South</option>
-    <option value="East">East</option>
-    <option value="West">West</option>
-    <option value="Central">Central</option>
-    <option value="Neither">Neither</option>
-  </select>
-  <!-- <span>{{ this.selectedRegion }}</span> -->
+  <h1 >Find Your Group</h1><br>
+<ul id="filters">
+    <li>
+        Filter by Region:
+        <select v-model="selectedRegion" id="filterByRegion" name="filterByRegion">
+          <option value="All Regions">All Regions</option>
+          <option value="North">North</option>
+          <option value="South">South</option>
+          <option value="East">East</option>
+          <option value="West">West</option>
+          <option value="Central">Central</option>
+          <option value="Neither">Neither</option>
+        </select>
+    </li>
+    <li>
+        Filter by Venue:
+        <select v-model="selectedVenue" id="filterByVenue" name="filterByVenue">
+          <option value="All Venues" selected >All Venues</option>
+          <option value="Cafe">Cafe</option>
+          <option value="Library">Library</option>
+          <option value="Zoom">Zoom</option>
+        </select>
+    </li>
+  </ul>
 
-  <br />
-  <br />Filter by Venue:
-  <br />
-  <select v-model="selectedVenue" id="filterByVenue" name="filterByVenue">
-    <option value="All Venues" selected >All Venues</option>
-    <option value="Cafe">Cafe</option>
-    <option value="Library">Library</option>
-    <option value="Zoom">Zoom</option>
-  </select>
-  <!-- <span>{{ this.selectedVenue }}</span> -->
 <br>
   <br />
-  <h1>Available Groups:</h1>
+  <h1>Available Groups</h1>
   <br />
   <body>
     <div id="app">
-      <ul>
+                  <div class="w3-col m7">
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                <div class="w3-card w3-round w3-white">
+     <br> 
+     <ul>
         <li v-for="item in filterRegion" v-bind:key="item.id">
+          
           <div style="white-space: pre-line;"><b>Region:</b> {{item.chooseRegion}}</div>
           <div style="white-space: pre-line;"><b>Venue:</b> {{item.chooseVenue}}</div>
-          <div style="white-space: pre-line;"><b>Group Creator's Email:</b> {{item.email}}</div>
-          <div style="white-space: pre-line;"><b>Group Creator's Phone Number:</b> {{item.phone}}</div>
           <div style="white-space: pre-line;"><b>Student's Course:</b> {{item.course}}</div>          
           <div style="white-space: pre-line;"><b>Module 1:</b> {{item.module1}}</div>
           <div style="white-space: pre-line;"><b>Module 2:</b> {{item.module2}}</div>
@@ -63,22 +52,20 @@
           <div style="white-space: pre-line;"><b>Remarks:</b> {{item.remark}}</div>
           <br>
           <button v-bind:id="item.id" v-on:click="joinGroup(item)">
-            Submit
-            <i class="fas fa-user-plus"></i>
+            Join
           </button>
           
-          <div style="white-space: pre-line;">--------------------------------------------------------------------------------------</div>
-          <br><br/>
+          <hr class="w3-clear">
+           <br><br/>
           <br />
         </li>
       </ul>
+      
 
-      <br />
-      <br />
-
-      <br />
-      <br />
+      </div></div></div><h3>Can't find a group? Create one now!</h3><br><br></div>
+    
     </div>
+    
   </body>
 </div>
 </template>
@@ -97,7 +84,7 @@ export default {
       course: store.state.user.course,
       email: store.state.user.email,
       number: store.state.user.contact,
-      count: 1,
+      counter: "",
       selectedRegion: "All Regions",
       selectedVenue: "All Venues"
     };
@@ -127,30 +114,38 @@ export default {
 
   methods: {
     joinGroup: function(item) {
-
+      this.counter=item.count;
+      this.counter++;
+      if (item.name==this.name){
+        alert("You are the creator of this group.")
+      }
+      else if (item.members.indexOf(this.name) != -1){
+        alert("You have already joined this group.")
+      }
+      else{
       database
         .collection("groups")
         .doc(item.id)
         .collection("studentInfo")
-        .doc("NewStudentInfo" + this.count)
+        .doc("NewStudentInfo" + this.counter)
         .set({ name: this.name }, { merge: true });
       database
         .collection("groups")
         .doc(item.id)
         .collection("studentInfo")
-        .doc("NewStudentInfo" + this.count)
+        .doc("NewStudentInfo" + this.counter)
         .set({ course: this.course }, { merge: true });
       database
         .collection("groups")
         .doc(item.id)
         .collection("studentInfo")
-        .doc("NewStudentInfo" + this.count)
+        .doc("NewStudentInfo" + this.counter)
         .set({ email: this.email }, { merge: true });
       database
         .collection("groups")
         .doc(item.id)
         .collection("studentInfo")
-        .doc("NewStudentInfo" + this.count)
+        .doc("NewStudentInfo" + this.counter)
         .set({ number: this.number }, { merge: true });
 
       if (item.members == " ") {
@@ -165,31 +160,35 @@ export default {
         .set({ members: item.members + ", " + this.name }, { merge: true });
       }
 
-
-      //this.studentName=database.collection('groups').doc(item.id).collection('studentInfo').doc('NewStudentInfo'+this.count).name;
-      //item.name = item.name + ", " + this.name;
       item.course = item.course + ", " + this.course;
-      this.count++;
-      // this.name = "";
-      // this.course = "";
-      // this.email = "";
-      // this.number = "";
+      alert("after operation count"+this.counter);
+
       alert("you have successfully been added!");
-    },
-    fetchItems: function() {
+    }},
+    fetchItems:  function() {
       database
         .collection("groups")
         .get()
         .then(querySnapShot => {
-          let item = {};
-          querySnapShot.forEach(doc => {
+          querySnapShot.forEach(async doc => {
+            let item;
             item = doc.data();
-            // item.show=false
             item.id = doc.id;
+            item.count=await this.fetchItem(item) || 0;
             this.itemList.push(item);
           });
-        });
-    }
+        }); 
+    },
+    fetchItem: function(item) {  
+      return database.collection('groups').doc(item.id).get().then((document)=>{
+          return document.ref.collection('studentInfo').get().then((querySnapShot)=>{  
+            console.log(querySnapShot.size);
+            return querySnapShot.size;
+        
+          });});      
+      
+
+             }
   },
   created() {
     this.fetchItems();
@@ -199,18 +198,16 @@ export default {
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
+@import url("https://www.w3schools.com/w3css/4/w3.css");
+@import url("https://www.w3schools.com/lib/w3-theme-blue-grey.css");
+
 #app {
-  margin: 20px auto;
-  max-width: 500px;
-  background: rgb(163, 220, 228);
-     padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-  border: 1px solid #555555;
+  text-align: center;
+  transform: translatex(20%);
   font-size: 13px;
+ 
   
 }
 
@@ -242,6 +239,23 @@ button{
     font-family: 'Ubuntu', sans-serif;
     font-size: 13px;
      
+}
+ul { list-style-type:none; }
+
+
+#filters{
+  display: table;
+  width: 30%;
+  height: 20px;
+  table-layout: fixed;
+  float: center;
+    transform: translatex(110%);
+}
+
+#filters li{
+  display: table-cell;
+  width: 25%;
+  text-align: center;  
 }
 
 </style>

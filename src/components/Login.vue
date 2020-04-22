@@ -76,7 +76,7 @@ export default {
             }
 
             if (existPassword && existUserName) {
-                //console.log(store.state.user.username);
+    
                 alert("Welcome Back, " + greetname + "!");
                 
                 store.commit('loginUser',{globalusername: name, globalname: greetname, 

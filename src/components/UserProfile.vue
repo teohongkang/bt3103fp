@@ -72,6 +72,8 @@
                                     <div style="white-space: pre-line;">Venue: {{user.chooseVenue}}</div>       
                                     <div style="white-space: pre-line;">Modules Preferred: {{user.module1}} {{user.module2}} {{user.module3}}</div>
                                     <div style="white-space: pre-line;">Group Creator: {{user.name}}</div>
+                                    <div style="white-space: pre-line;">Group Creator's Email: {{user.email}}</div>
+                                    <div style="white-space: pre-line;">Group Creator's Phone Number: {{user.phone}}</div>
                                     <div style="white-space: pre-line;">Group Members: {{user.members}}</div>
                                     <div style="white-space: pre-line;">Remarks: {{user.remark}}</div>
                                     <hr class="w3-clear">

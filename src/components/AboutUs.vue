@@ -28,10 +28,6 @@
 
 		<h2> Contact Us </h2>
 		
-		<!-- Your Name: <br>
-		<input type="text" name="realname" v-model="realName"/><br>
-		<br> -->
-
 		Your Preferred Email: <br>
 		<input type="text" name="email" v-model="email"/><br>
 		<br>
@@ -66,10 +62,11 @@ import Header from "./Header.vue"
             return {
                 image:"https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 realName:store.state.user.name,
-                email:"",
+                email:'',
                 comments:"",
                 concernTopic:"",
-                count:1,
+                count:"",
+                
             }
         },
 
@@ -85,36 +82,38 @@ import Header from "./Header.vue"
                     alert("Please enter your comments.");
                     return false;
                 } else {
-                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
-                .doc('FeedbackNumber '+this.count).set({Topic:this.concernTopic}, { merge: true });
-                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
-                .doc('FeedbackNumber '+this.count).set({name:this.realName}, { merge: true });
-                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
-                .doc('FeedbackNumber '+this.count).set({email:this.email}, { merge: true });
-                database.collection('AboutUsFeedback').doc('Bx8gIL3l0KKc2ViJOSFb').collection('Feedback')
-                .doc('FeedbackNumber '+this.count).set({comment:this.comments}, { merge: true });
-                this.count++;
-                alert("this is update function")
+                this.count++;             
+                database.collection('testfeedback').doc('testfeedbacknum'+this.count)
+                .set({Topic: this.concernTopic, name:this.realName, email:this.email, comment:this.comments}, { merge: true });
+
                 this.realName="";
                 this.email="";
                 this.comments="";
                 this.concernTopic=""; 
                     alert("Thank you for getting in touch with us. A team member will get back to you soon.");
                 }
-            }
+            },
+
+            fetchItems: function() {
+                database.collection('testfeedback').get().then(snap => {
+                this.count = snap.size
+                });
+             }
+
         },
-        
+
+        created() {
+            this.fetchItems();
+  },      
         components: {
             "app-header": Header
-        }
+        },
     }
 </script>
 
 <style scoped>
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 #main {
-	/* font-family: "Book Antiqua"; */
-    /* text-align: left; */
     font-size: small;
 
 }
@@ -127,11 +126,6 @@ image {
 }
 
 button {
-	/* border-radius: 4px;
-	border: 1px solid #555555;
-	padding: 10px 15px;
-	cursor: pointer;
-	font-family: "Book Antiqua"; */
     cursor: pointer;
     color: #fff;
     background: #16A085;
@@ -150,17 +144,16 @@ input {
 	padding: 5px 10px;
 	border-radius: 2px;
 	border: 1px solid #555555;
-	/* font-family: "Book Antiqua"; */
 }
 
 select {
 	padding: 2px;
 	border-radius: 1px;
 	border: 1px solid #555555;
-	/* font-family: "Book Antiqua"; */
 }
 
 h3 {
 	line-height: 200%;
 }
+ul { list-style-type:none; }
 </style>

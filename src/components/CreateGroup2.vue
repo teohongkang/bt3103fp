@@ -100,20 +100,10 @@ export default {
         library.get().then(doc => {this.venueCount.library = doc.data().count;})
         zoom.get().then(doc => {this.venueCount.zoom = doc.data().count;})
         
-        // this.regionCount.allRegions = database.collection('region').doc('All Region').get().data().count;
-        // this.regionCount.north = database.collection('region').doc('North').data().count;
-        // this.regionCount.south = database.collection('region').doc('South').data().count;
-        // this.regionCount.east = database.collection('region').doc('East').data().count;
-        // this.regionCount.west = database.collection('region').doc('West').data().count;
-        // this.regionCount.central = database.collection('region').doc('Central').data().count;
-        
-        // this.venueCount.allVenues = database.collection('venue').doc('All Venues').data().count;
-        // this.venueCount.cafe = database.collection('venue').doc('Cafe').data().count;
-        // this.venueCount.library = database.collection('venue').doc('Library').data().count;
     },
     methods:{
             addGroup:  function () {
-                //Save item to database
+      
                 if (this.group.chooseRegion == "" || this.group.chooseVenue == ""){
                     alert("Please choose a region or venue");
                 } else {
@@ -123,7 +113,7 @@ export default {
                     if (tempRegion=="All"){
                         this.regionCount.allRegions+=1;
                         alert("region count for all regions is: "+this.regionCount.allRegions);
-                        //alert("testing to see if this method of retrieval gets anything"+database.collection('region').doc('All Region').data().count);
+                      
                         database.collection('region').doc('All Region').set({count: this.regionCount.allRegions});
                     } 
                     if (tempRegion == "North"){
@@ -172,16 +162,7 @@ export default {
                     this.group.members=" ";
                     alert("Group created successfully");
                 }
-            } /*
-            addDashboard: function () {
-                let tempRegion = database.collection('dashboard').doc('region').get(this.group.chooseRegion);
-                let tempVenue = database.collection('dashboard').doc('venue').get(this.group.chooseVenue);
-                tempRegion+=1;
-                //alert(tempRegion);
-                tempVenue+=1;
-                database.collection('dashboard').doc('region').get(this.group.chooseRegion).set(tempRegion);
-                database.collection('dashboard').doc('venue').get(this.group.chooseVenue).set(tempVenue);
-            }*/
+            } 
         }
 }
 </script>
